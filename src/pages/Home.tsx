@@ -490,7 +490,7 @@ export default function Home() {
               Work with a team that understands materials, markets, and
               performance.
             </p>
-            <Link to="/contact" className="cta-btn">
+            <Link to="/contact" className="cta-btn1">
               Get In Touch
               <ArrowIcon />
             </Link>

@@ -1,5 +1,5 @@
 // pages/Contact.tsx
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import type { FormEvent, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
@@ -14,6 +14,8 @@ interface ContactFormState {
 }
 
 type FormStatus = "idle" | "sending" | "success" | "error";
+
+type FieldErrors = Partial<Record<keyof ContactFormState, string>>;
 
 const initialForm: ContactFormState = {
   name: "",
@@ -49,6 +51,8 @@ const COMPANY = {
     "Tal. Miraj, Dist. Sangli,",
     "Maharashtra 416410",
   ],
+  mapEmbedSrc:
+    "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7635.895751995775!2d74.62296142530236!3d16.878472820345692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1792075515792!5m2!1sen!2sin",
 };
 
 const contactDetails: ContactDetail[] = [
@@ -60,10 +64,7 @@ const contactDetails: ContactDetail[] = [
   {
     id: "phone",
     label: "Phone",
-    lines: [
-      COMPANY.phonePrimary.display,
-      COMPANY.phoneSecondary.display,
-    ],
+    lines: [COMPANY.phonePrimary.display, COMPANY.phoneSecondary.display],
     href: COMPANY.phonePrimary.href,
   },
   {
@@ -79,8 +80,76 @@ const contactDetails: ContactDetail[] = [
   },
 ];
 
+/* ---------- Icons ---------- */
+const PhoneIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.9"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" />
+  </svg>
+);
+
+const MailIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.9"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="M3 7l9 6 9-6" />
+  </svg>
+);
+
+const ArrowRightIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
+
+const ArrowDownIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 5v14M5 12l7 7 7-7" />
+  </svg>
+);
+
 const ContactIcon = ({ name }: { name: ContactDetail["id"] }) => {
   const common = {
+    width: 20,
+    height: 20,
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -121,36 +190,87 @@ const ContactIcon = ({ name }: { name: ContactDetail["id"] }) => {
   }
 };
 
+/* ---------- Validation ---------- */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validate(form: ContactFormState): FieldErrors {
+  const errors: FieldErrors = {};
+
+  if (!form.name.trim()) errors.name = "Please enter your name.";
+  else if (form.name.trim().length < 2)
+    errors.name = "Name must be at least 2 characters.";
+
+  if (!form.email.trim()) errors.email = "Please enter your email.";
+  else if (!EMAIL_RE.test(form.email.trim()))
+    errors.email = "Please enter a valid email address.";
+
+  if (form.phone.trim() && !/^[\d\s()+-]{6,}$/.test(form.phone.trim()))
+    errors.phone = "Please enter a valid phone number.";
+
+  if (!form.message.trim()) errors.message = "Please enter a message.";
+  else if (form.message.trim().length < 10)
+    errors.message = "Message should be at least 10 characters.";
+
+  return errors;
+}
+
 /* ---------- Component ---------- */
 const Contact = () => {
   const [form, setForm] = useState<ContactFormState>(initialForm);
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    if (status !== "idle") setStatus("idle");
-  };
+  const handleChange = useCallback(
+    (
+      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      const { name, value } = e.target;
+      setForm((prev) => ({ ...prev, [name]: value }));
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      // Clear the specific field error as the user types
+      setErrors((prev) => {
+        if (!prev[name as keyof ContactFormState]) return prev;
+        const next = { ...prev };
+        delete next[name as keyof ContactFormState];
+        return next;
+      });
+
+      if (status !== "idle") setStatus("idle");
+    },
+    [status]
+  );
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    const nextErrors = validate(form);
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
       setStatus("error");
+      // Focus the first invalid field
+      const firstKey = Object.keys(nextErrors)[0];
+      const el = document.getElementById(`contact-${firstKey}`);
+      el?.focus();
       return;
     }
 
     setStatus("sending");
 
     // TODO: wire this up to your backend / email service
-    console.log("Form submitted:", form);
+    try {
+      // Simulate network request — replace with fetch/axios
+      await new Promise((res) => setTimeout(res, 600));
+      console.log("Form submitted:", form);
 
-    setTimeout(() => {
       setStatus("success");
       setForm(initialForm);
-      setTimeout(() => setStatus("idle"), 4000);
-    }, 600);
+      setErrors({});
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -167,31 +287,44 @@ const Contact = () => {
           <div className="contact-hero-layout">
             {/* LEFT — Editorial content */}
             <div className="contact-hero-content">
-              <nav className="contact-hero-breadcrumb" aria-label="Breadcrumb">
+              <nav
+                className="contact-hero-breadcrumb"
+                aria-label="Breadcrumb"
+              >
                 <Link to="/" className="contact-breadcrumb-link">
                   Home
                 </Link>
-                <span className="contact-breadcrumb-sep" aria-hidden="true">
+                <span
+                  className="contact-breadcrumb-sep"
+                  aria-hidden="true"
+                >
                   /
                 </span>
-                <span className="contact-breadcrumb-current">Contact</span>
+                <span className="contact-breadcrumb-current">
+                  Contact
+                </span>
               </nav>
 
               <span className="contact-hero-eyebrow">
-                <span className="contact-hero-eyebrow-dot" aria-hidden="true" />
+                <span
+                  className="contact-hero-eyebrow-dot"
+                  aria-hidden="true"
+                />
                 Get In Touch
               </span>
 
               <h1 className="contact-hero-title">
                 Let's start a{" "}
-                <span className="contact-hero-title-em">conversation</span>{" "}
+                <span className="contact-hero-title-em">
+                  conversation
+                </span>{" "}
                 about packaging.
               </h1>
 
               <p className="contact-hero-description">
-                Whether you're sourcing, designing, or scaling — our team has
-                the packaging expertise to help you move faster, with the
-                quality and turnaround your business depends on.
+                Whether you're sourcing, designing, or scaling — our team
+                has the packaging expertise to help you move faster, with
+                the quality and turnaround your business depends on.
               </p>
 
               <div className="contact-hero-actions">
@@ -200,43 +333,22 @@ const Contact = () => {
                   className="contact-btn contact-btn-primary"
                 >
                   Send a Message
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 5v14M5 12l7 7 7-7" />
-                  </svg>
+                  <ArrowDownIcon />
                 </a>
                 <a
                   href={COMPANY.phonePrimary.href}
                   className="contact-btn contact-btn-ghost"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.9"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" />
-                  </svg>
+                  <PhoneIcon size={16} />
                   Call Us
                 </a>
               </div>
 
               {/* Trust bar */}
-              <ul className="contact-hero-trust" aria-label="Highlights">
+              <ul
+                className="contact-hero-trust"
+                aria-label="Highlights"
+              >
                 <li className="contact-hero-trust-item">
                   <span className="contact-hero-trust-value">15+</span>
                   <span className="contact-hero-trust-label">
@@ -259,20 +371,14 @@ const Contact = () => {
             </div>
 
             {/* RIGHT — Floating contact cards */}
-            <div className="contact-hero-cards" aria-hidden="true">
+            <div
+              className="contact-hero-cards"
+              aria-hidden="true"
+            >
               <div className="contact-hero-cards-inner">
                 <div className="contact-hero-card card-1">
                   <span className="contact-hero-card-icon">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" />
-                    </svg>
+                    <PhoneIcon size={18} />
                   </span>
                   <div className="contact-hero-card-body">
                     <span className="contact-hero-card-label">
@@ -286,20 +392,12 @@ const Contact = () => {
 
                 <div className="contact-hero-card card-2">
                   <span className="contact-hero-card-icon">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect x="3" y="5" width="18" height="14" rx="2" />
-                      <path d="M3 7l9 6 9-6" />
-                    </svg>
+                    <MailIcon size={18} />
                   </span>
                   <div className="contact-hero-card-body">
-                    <span className="contact-hero-card-label">Email</span>
+                    <span className="contact-hero-card-label">
+                      Email
+                    </span>
                     <span className="contact-hero-card-value">
                       {COMPANY.email}
                     </span>
@@ -308,16 +406,7 @@ const Contact = () => {
 
                 <div className="contact-hero-card card-3">
                   <span className="contact-hero-card-icon">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" />
-                    </svg>
+                    <PhoneIcon size={18} />
                   </span>
                   <div className="contact-hero-card-body">
                     <span className="contact-hero-card-label">
@@ -332,14 +421,15 @@ const Contact = () => {
                 <div className="contact-hero-card card-4">
                   <span className="contact-hero-card-dot" />
                   <div className="contact-hero-card-body">
-                    <span className="contact-hero-card-label">Status</span>
+                    <span className="contact-hero-card-label">
+                      Status
+                    </span>
                     <span className="contact-hero-card-value">
                       Available Now
                     </span>
                   </div>
                 </div>
 
-                {/* Decorative ring behind cards */}
                 <span className="contact-hero-cards-ring" />
               </div>
             </div>
@@ -356,8 +446,8 @@ const Contact = () => {
               <span className="contact-eyebrow">Get In Touch</span>
               <h2 className="contact-h2">We're here to help.</h2>
               <p className="contact-intro">
-                Whether you're sourcing, designing, or scaling — our team has
-                the packaging expertise to help you move faster.
+                Whether you're sourcing, designing, or scaling — our team
+                has the packaging expertise to help you move faster.
               </p>
 
               <div className="contact-details">
@@ -372,7 +462,10 @@ const Contact = () => {
                           {detail.label}
                         </span>
                         {detail.lines.map((line, i) => (
-                          <span key={i} className="contact-detail-line">
+                          <span
+                            key={i}
+                            className="contact-detail-line"
+                          >
                             {line}
                           </span>
                         ))}
@@ -389,7 +482,10 @@ const Contact = () => {
                       {content}
                     </a>
                   ) : (
-                    <div key={detail.id} className="contact-detail-item">
+                    <div
+                      key={detail.id}
+                      className="contact-detail-item"
+                    >
                       {content}
                     </div>
                   );
@@ -400,17 +496,27 @@ const Contact = () => {
             {/* RIGHT — Form card */}
             <div className="contact-form-card" id="contact-form">
               <div className="contact-form-head">
-                <span className="contact-form-eyebrow">Send a Message</span>
+                <span className="contact-form-eyebrow">
+                  Send a Message
+                </span>
                 <h3 className="contact-form-title">Leave us a note</h3>
                 <p className="contact-form-subtitle">
-                  Fill in the form and we'll get back within one business day.
+                  Fill in the form and we'll get back within one business
+                  day.
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="contact-form" noValidate>
+              <form
+                onSubmit={handleSubmit}
+                className="contact-form"
+                noValidate
+              >
                 <div className="contact-form-row">
                   <div className="contact-field">
-                    <label htmlFor="contact-name" className="contact-label">
+                    <label
+                      htmlFor="contact-name"
+                      className="contact-label"
+                    >
                       Your Name
                     </label>
                     <input
@@ -421,12 +527,28 @@ const Contact = () => {
                       value={form.name}
                       onChange={handleChange}
                       autoComplete="name"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={
+                        errors.name ? "err-name" : undefined
+                      }
                       required
                     />
+                    {errors.name && (
+                      <span
+                        id="err-name"
+                        className="contact-field-error"
+                        role="alert"
+                      >
+                        {errors.name}
+                      </span>
+                    )}
                   </div>
 
                   <div className="contact-field">
-                    <label htmlFor="contact-email" className="contact-label">
+                    <label
+                      htmlFor="contact-email"
+                      className="contact-label"
+                    >
                       Email Address
                     </label>
                     <input
@@ -437,14 +559,30 @@ const Contact = () => {
                       value={form.email}
                       onChange={handleChange}
                       autoComplete="email"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={
+                        errors.email ? "err-email" : undefined
+                      }
                       required
                     />
+                    {errors.email && (
+                      <span
+                        id="err-email"
+                        className="contact-field-error"
+                        role="alert"
+                      >
+                        {errors.email}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <div className="contact-form-row">
                   <div className="contact-field">
-                    <label htmlFor="contact-phone" className="contact-label">
+                    <label
+                      htmlFor="contact-phone"
+                      className="contact-label"
+                    >
                       Phone Number
                     </label>
                     <input
@@ -455,11 +593,27 @@ const Contact = () => {
                       value={form.phone}
                       onChange={handleChange}
                       autoComplete="tel"
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={
+                        errors.phone ? "err-phone" : undefined
+                      }
                     />
+                    {errors.phone && (
+                      <span
+                        id="err-phone"
+                        className="contact-field-error"
+                        role="alert"
+                      >
+                        {errors.phone}
+                      </span>
+                    )}
                   </div>
 
                   <div className="contact-field">
-                    <label htmlFor="contact-subject" className="contact-label">
+                    <label
+                      htmlFor="contact-subject"
+                      className="contact-label"
+                    >
                       Subject
                     </label>
                     <input
@@ -474,7 +628,10 @@ const Contact = () => {
                 </div>
 
                 <div className="contact-field">
-                  <label htmlFor="contact-message" className="contact-label">
+                  <label
+                    htmlFor="contact-message"
+                    className="contact-label"
+                  >
                     Message
                   </label>
                   <textarea
@@ -484,8 +641,21 @@ const Contact = () => {
                     rows={5}
                     value={form.message}
                     onChange={handleChange}
+                    aria-invalid={!!errors.message}
+                    aria-describedby={
+                      errors.message ? "err-message" : undefined
+                    }
                     required
                   />
+                  {errors.message && (
+                    <span
+                      id="err-message"
+                      className="contact-field-error"
+                      role="alert"
+                    >
+                      {errors.message}
+                    </span>
+                  )}
                 </div>
 
                 <button
@@ -494,19 +664,7 @@ const Contact = () => {
                   disabled={status === "sending"}
                 >
                   {status === "sending" ? "Sending…" : "Send Message"}
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
+                  <ArrowRightIcon />
                 </button>
 
                 <div
@@ -516,14 +674,16 @@ const Contact = () => {
                 >
                   {status === "success" && (
                     <p className="contact-msg success">
-                      Thank you! Your message has been received.
+                      Thank you! Your message has been received. We'll
+                      get back within one business day.
                     </p>
                   )}
-                  {status === "error" && (
-                    <p className="contact-msg error">
-                      Please fill in your name, email, and message.
-                    </p>
-                  )}
+                  {status === "error" &&
+                    Object.keys(errors).length === 0 && (
+                      <p className="contact-msg error">
+                        Something went wrong. Please try again.
+                      </p>
+                    )}
                 </div>
               </form>
             </div>
@@ -540,17 +700,22 @@ const Contact = () => {
               Visit our {COMPANY.addressShort} plant
             </h2>
             <p className="contact-map-subtitle">
-              Our manufacturing facility is located in Bamnoli, near Miraj,
-              Sangli — easily reachable from Pune, Kolhapur, and Mumbai.
+              Our manufacturing facility is located in Bamnoli, near
+              Miraj, Sangli — easily reachable from Pune, Kolhapur, and
+              Mumbai.
             </p>
           </div>
         </div>
         <div className="contact-map-frame">
           <iframe
             title={`${COMPANY.name} — Bamnoli, Sangli Location`}
-            src="https://www.google.com/maps?q=Bamnoli,+Miraj,+Sangli,+Maharashtra+416410&output=embed"
+            src={COMPANY.mapEmbedSrc}
+            width="600"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
       </section>

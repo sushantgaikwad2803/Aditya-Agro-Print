@@ -68,7 +68,7 @@ const Services = () => {
         <div className="container">
           <div className="hero-wrapper">
             <nav className="hero-breadcrumb" aria-label="Breadcrumb">
-              <Link to="/" className="breadcrumb-link">
+              <Link to="/" className="breadcrumb-link1">
                 Home
               </Link>
               <span className="breadcrumb-sep" aria-hidden="true">
@@ -79,7 +79,7 @@ const Services = () => {
 
             <h1 className="hero-title">
               Comprehensive support for{" "}
-              <span className="text-accent">your packaging journey</span>
+              <span className="text-accent1">your packaging journey</span>
             </h1>
 
             <p className="hero-description">
@@ -94,13 +94,6 @@ const Services = () => {
       {/* ---------- 2. SERVICES GRID ---------- */}
       <section className="services-grid-section" id="services-grid">
         <div className="container">
-          <header className="services-header">
-            <h2 className="services-heading">What we offer</h2>
-            <p className="services-subheading">
-              Five core services designed to move your packaging from concept
-              to market — reliably and efficiently.
-            </p>
-          </header>
 
           <div className="services-grid">
             {services.map((service, index) => (
@@ -148,12 +141,12 @@ const Services = () => {
       <section className="services-cta">
         <div className="container">
           <div className="cta-content">
-            <h2 className="cta-title">Ready to elevate your packaging?</h2>
+            <h2 className="cta-title1">Ready to elevate your packaging?</h2>
             <p className="cta-text">
               Partner with us for reliable, end-to-end packaging solutions
               tailored to your exact specifications and business goals.
             </p>
-            <Link to="/contact" className="cta-btn">
+            <Link to="/contact" className="cta-btn1">
               Get In Touch
               <svg
                 xmlns="http://www.w3.org/2000/svg"

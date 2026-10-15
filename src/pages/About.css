@@ -645,14 +645,14 @@
 }
 
 .about-cta-content {
-  max-width: 680px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .about-cta-title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: var(--about-ink);
+  color: var(--about-primary);
   margin: 0 0 1rem;
   letter-spacing: -0.02em;
   line-height: 1.2;

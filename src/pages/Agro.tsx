@@ -363,7 +363,7 @@ const Agro = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> 
         </div>
       </section>
 
@@ -372,7 +372,7 @@ const Agro = () => {
         <div className="agro-container">
           <div className="agro-cta-content">
             <h2 className="agro-cta-title">
-              Looking to Source Agro Commodities from India?
+              Looking Commodities from India?
             </h2>
             <p className="agro-cta-text">
               We help you identify the right products, specifications, and

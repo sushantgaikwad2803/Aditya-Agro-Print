@@ -13,13 +13,13 @@
   --cap-primary-light: #bb3faa;
   --cap-primary-soft: #fff5fe;
   --cap-primary-glow: rgba(169, 0, 145, 0.18);
+  --cap-primary-glow-strong: rgba(169, 0, 145, 0.32);
 
   --cap-bg: #ffffff;
-  --cap-bg-alt: #fafafa;
+  --cap-bg-alt: #f8f9fa;
   --cap-line: #e5e7eb;
 
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--cap-ink);
   background-color: var(--cap-bg);
   min-height: 100vh;
@@ -35,7 +35,7 @@
 }
 
 /* ============================================================
-   1. HERO — Matched to Sustainability & Services pages
+   1. HERO
    ============================================================ */
 .cap-hero {
   padding: 6rem 0 5rem;
@@ -52,11 +52,7 @@
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(
-    circle,
-    var(--cap-primary-glow) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, var(--cap-primary-glow) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
@@ -69,14 +65,8 @@
 }
 
 @keyframes capFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------- Breadcrumb ---------- */
@@ -101,13 +91,8 @@
   text-decoration: underline;
 }
 
-.cap-breadcrumb-sep {
-  color: var(--cap-line);
-}
-
-.cap-breadcrumb-current {
-  color: var(--cap-ink);
-}
+.cap-breadcrumb-sep { color: var(--cap-line); }
+.cap-breadcrumb-current { color: var(--cap-ink); }
 
 /* ---------- Title ---------- */
 .cap-hero-title {
@@ -115,7 +100,7 @@
   font-weight: 800;
   color: var(--cap-ink);
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   margin: 0 0 1.5rem;
   max-width: 900px;
 }
@@ -138,26 +123,26 @@
    2. CAPABILITIES GRID
    ============================================================ */
 .cap-grid-section {
-  padding: 5rem 0 6rem;
-  background-color: var(--cap-bg);
+  padding: 6rem 0 7rem;
+  background-color: var(--cap-bg-alt);
 }
 
 .cap-grid-header {
   text-align: center;
   max-width: 620px;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 4rem;
 }
 
 .cap-grid-heading {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
   color: var(--cap-ink);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.85rem;
   letter-spacing: -0.02em;
 }
 
 .cap-grid-subheading {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--cap-ink-soft);
   line-height: 1.7;
   margin: 0;
@@ -166,7 +151,7 @@
 .cap-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 /* ---------- Card ---------- */
@@ -175,27 +160,18 @@
   flex-direction: column;
   background: var(--cap-bg);
   border: 1px solid var(--cap-line);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   opacity: 0;
-  animation: capCardEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.3s ease;
+  animation: capCardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.3s ease;
 }
 
 @keyframes capCardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cap-card:hover {
@@ -231,13 +207,9 @@
 .cap-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(17, 24, 39, 0.35) 0%,
-    rgba(17, 24, 39, 0) 55%
-  );
+  background: linear-gradient(to top, rgba(17, 24, 39, 0.4) 0%, rgba(17, 24, 39, 0) 60%);
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.9;
   transition: opacity 0.3s ease;
 }
 
@@ -260,6 +232,7 @@
   color: var(--cap-ink);
   margin: 0;
   line-height: 1.3;
+  letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
 
@@ -282,12 +255,10 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--cap-primary);
-  margin-top: 0.5rem;
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 0.75rem;
+  opacity: 0.8;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease);
 }
 
 .cap-card-cta svg {
@@ -296,7 +267,6 @@
 
 .cap-card:hover .cap-card-cta {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .cap-card:hover .cap-card-cta svg {
@@ -308,9 +278,9 @@
    ============================================================ */
 .cap-cta {
   padding: 6rem 0;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-top: 1px solid var(--cap-line);
   text-align: center;
-  background-color: var(--cap-ink);
-  color: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -323,13 +293,10 @@
   transform: translateX(-50%);
   width: 800px;
   height: 600px;
-  background: radial-gradient(
-    circle,
-    var(--cap-primary-glow) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, var(--cap-primary-glow) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.8;
 }
 
 .cap-cta .cap-container {
@@ -338,22 +305,23 @@
 }
 
 .cap-cta-content {
-  max-width: 650px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .cap-cta-title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: #ffffff;
+  color: var(--cap-primary);
   margin: 0 0 1rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 .cap-cta-text {
   font-size: 1.125rem;
-  color: var(--cap-ink-light);
+  color: var(--cap-ink-soft);
   margin: 0 auto 2.5rem;
   line-height: 1.7;
 }
@@ -372,16 +340,13 @@
   border: none;
   cursor: pointer;
   box-shadow: 0 8px 20px -6px var(--cap-primary-glow);
-  transition:
-    background-color 0.3s ease,
-    transform 0.25s ease,
-    box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
 }
 
 .cap-cta-btn:hover {
   background-color: var(--cap-primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -8px var(--cap-primary-glow);
+  box-shadow: 0 12px 28px -8px var(--cap-primary-glow-strong);
 }
 
 .cap-cta-btn:active {
@@ -402,40 +367,23 @@
    4. RESPONSIVE
    ============================================================ */
 @media (min-width: 600px) {
-  .cap-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 960px) {
-  .cap-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .cap-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1160px) {
-  .cap-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .cap-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (max-width: 600px) {
-  .cap-hero {
-    padding: 4rem 0 3rem;
-  }
-
-  .cap-grid-section {
-    padding: 3rem 0 4rem;
-  }
-
-  .cap-grid-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .cap-cta {
-    padding: 4rem 0;
-  }
-
+  .cap-hero { padding: 4rem 0 3rem; }
+  .cap-grid-section { padding: 4rem 0 5rem; }
+  .cap-grid-header { margin-bottom: 2.5rem; }
+  .cap-cta { padding: 4rem 0; }
+  
   .cap-cta-btn {
     width: 100%;
     justify-content: center;
@@ -451,7 +399,6 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-
   .cap-card {
     opacity: 1;
     animation: none;
@@ -459,11 +406,6 @@
 }
 
 @media (prefers-contrast: high) {
-  .cap-card {
-    border-width: 2px;
-  }
-
-  .cap-cta-btn {
-    border: 2px solid #ffffff;
-  }
+  .cap-card { border-width: 2px; }
+  .cap-cta-btn { border: 2px solid #ffffff; }
 }

@@ -93,7 +93,7 @@ const InHouseGravure = () => {
             From film production to pouch manufacturing, we provide complete
             end-to-end packaging services under one roof.
           </p>
-          <button className="cta-btn">
+          <button className="cta-btn1">
             Get In Touch
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -464,7 +464,7 @@
   line-height: 1.7;
 }
 
-.cta-btn {
+.cta-btn1 {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -482,13 +482,13 @@
   letter-spacing: 0.01em;
 }
 
-.cta-btn:hover {
+.cta-btn1:hover {
   background-color: var(--cap-primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 10px 28px var(--cap-primary-glow);
 }
 
-.cta-btn:active {
+.cta-btn1:active {
   transform: translateY(0);
 }
 
@@ -498,7 +498,7 @@
   transition: transform 0.3s ease;
 }
 
-.cta-btn:hover .cta-arrow {
+.cta-btn1:hover .cta-arrow {
   transform: translateX(3px);
 }
 
@@ -601,7 +601,7 @@
     font-size: 1.65rem;
   }
 
-  .cta-btn {
+  .cta-btn1 {
     padding: 0.9rem 1.85rem;
     font-size: 0.95rem;
   }
@@ -618,7 +618,7 @@
   .extrusion-image-frame,
   .extrusion-info-card,
   .extrusion-image-wrapper img,
-  .cta-btn,
+  .cta-btn1,
   .app-arrow,
   .cta-arrow {
     transition: none;

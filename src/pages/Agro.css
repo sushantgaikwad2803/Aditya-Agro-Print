@@ -408,7 +408,7 @@
    7. CTA
    ============================================================ */
 .agro-cta {
-  padding: 6rem 0;
+  padding: 4rem 0;
   background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
   border-top: 1px solid var(--agro-line);
   text-align: center;
@@ -443,7 +443,7 @@
 .agro-cta-title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: var(--agro-ink);
+  color: var(--agro-primary);
   margin: 0 0 1rem;
   letter-spacing: -0.02em;
   line-height: 1.2;

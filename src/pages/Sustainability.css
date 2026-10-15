@@ -1,0 +1,624 @@
+/* ============================================================
+   SUSTAINABILITY PAGE — Clean, Modern & Brand-Aligned
+   ============================================================ */
+
+/* 0. VARIABLES & BASE */
+.sustainability-page {
+  --sus-ink: #111827;
+  --sus-ink-soft: #4b5563;
+  --sus-ink-light: #9ca3af;
+
+  /* Brand Colors */
+  --sus-primary: #a90091;
+  --sus-primary-dark: #7d006c;
+  --sus-primary-light: #bb3faa;
+  --sus-primary-soft: #fff5fe;
+  --sus-primary-glow: rgba(169, 0, 145, 0.18);
+
+  --sus-bg: #ffffff;
+  --sus-bg-alt: #fafafa;
+  --sus-line: #e5e7eb;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--sus-ink);
+  background-color: var(--sus-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* ============================================================
+   1. HERO
+   ============================================================ */
+.sus-hero {
+  padding: 6rem 0 5rem;
+  background-color: var(--sus-bg);
+  border-bottom: 1px solid var(--sus-line);
+}
+
+.hero-wrapper {
+  max-width: 800px;
+  margin: 0;
+  text-align: left;
+  animation: susFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes susFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sus-ink-soft);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb-link {
+  color: var(--sus-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+  color: var(--sus-primary-dark);
+  text-decoration: underline;
+}
+
+.breadcrumb-sep {
+  color: var(--sus-line);
+}
+
+.breadcrumb-current {
+  color: var(--sus-ink);
+}
+
+.hero-title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--sus-ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+}
+
+.text-accent {
+  color: var(--sus-primary);
+  display: inline;
+}
+
+.hero-description {
+  font-size: clamp(1.05rem, 1.5vw, 1.15rem);
+  color: var(--sus-ink-soft);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 650px;
+}
+
+.hero-description strong {
+  color: var(--sus-ink);
+  font-weight: 700;
+}
+
+/* ============================================================
+   2. OUR APPROACH
+   ============================================================ */
+.sus-approach {
+  padding: 6rem 0;
+}
+
+.approach-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+.approach-image {
+  flex: 1;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+}
+
+.approach-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.approach-image:hover img {
+  transform: scale(1.03);
+}
+
+.approach-content {
+  flex: 1.2;
+  width: 100%;
+}
+
+.approach-content h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--sus-ink);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.approach-subheading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sus-primary);
+  margin: 0 0 1rem;
+  line-height: 1.4;
+}
+
+.approach-paragraph {
+  font-size: 1rem;
+  color: var(--sus-ink-soft);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+}
+
+.approach-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.approach-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--sus-bg-alt);
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--sus-line);
+  gap: 0.75rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.approach-stat:hover {
+  border-color: var(--sus-primary);
+  box-shadow: 0 8px 20px -8px var(--sus-primary-glow);
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sus-primary);
+  background-color: var(--sus-primary-soft);
+  border-radius: 10px;
+}
+
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--sus-ink);
+  line-height: 1.3;
+}
+
+/* ============================================================
+   3. ALTERNATING BLOCKS
+   ============================================================ */
+.sus-block-section {
+  padding: 4rem 0;
+}
+
+.sus-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+.sus-card {
+  flex: 1.2;
+  width: 100%;
+  background: var(--sus-bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--sus-line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.sus-card h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--sus-ink);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.sus-subheading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sus-primary);
+  margin: 0 0 1rem;
+  line-height: 1.4;
+}
+
+.sus-intro {
+  font-size: 1rem;
+  color: var(--sus-ink-soft);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+}
+
+.sus-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sus-bullets li {
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--sus-ink-soft);
+  line-height: 1.6;
+  padding-left: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.bullet-check {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  color: var(--sus-primary);
+  margin-top: 2px;
+}
+
+.sus-image {
+  flex: 1;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+}
+
+.sus-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sus-image:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   4. PCR / PIR SECTION
+   ============================================================ */
+.sus-pcr-section {
+  padding: 4rem 0 6rem;
+}
+
+.pcr-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.pcr-image {
+  flex: 1;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+}
+
+.pcr-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pcr-image:hover img {
+  transform: scale(1.03);
+}
+
+.pcr-card {
+  flex: 1.2;
+  width: 100%;
+  background: var(--sus-bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--sus-line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.pcr-card h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--sus-ink);
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+.pcr-card p {
+  font-size: 1rem;
+  color: var(--sus-ink-soft);
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.pcr-card p:last-child {
+  margin-bottom: 0;
+}
+
+.pcr-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.pcr-feature-card {
+  background: var(--sus-bg);
+  border-radius: 12px;
+  border: 1px solid var(--sus-line);
+  padding: 1.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pcr-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px var(--sus-primary-glow);
+  border-color: var(--sus-primary);
+}
+
+.pcr-feature-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sus-primary);
+  background-color: var(--sus-primary-soft);
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.pcr-feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.pcr-feature-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sus-ink);
+  margin: 0 0 0.75rem;
+}
+
+.pcr-feature-card p {
+  font-size: 0.9rem;
+  color: var(--sus-ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   5. COMMITMENT BAND
+   ============================================================ */
+.sus-commitment {
+  background-color: var(--sus-ink);
+  padding: 5rem 0;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.sus-commitment::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, var(--sus-primary-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.commitment-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.sus-commitment h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.commitment-subheading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sus-primary-light);
+  margin: 0 auto 1.25rem;
+  line-height: 1.5;
+}
+
+.commitment-text {
+  font-size: 1rem;
+  color: var(--sus-ink-light);
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   6. TRANSITION CTA
+   ============================================================ */
+.sus-cta {
+  padding: 6rem 0;
+  text-align: center;
+  background-color: var(--sus-bg-alt);
+  border-top: 1px solid var(--sus-line);
+}
+
+.cta-content {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--sus-ink);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cta-text {
+  font-size: 1.125rem;
+  color: var(--sus-ink-soft);
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--sus-primary);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem 2.25rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -6px var(--sus-primary-glow);
+  transition: background-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: var(--sus-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -8px var(--sus-primary-glow);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+.cta-btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   7. RESPONSIVE DESIGN
+   ============================================================ */
+@media (min-width: 900px) {
+  .approach-block,
+  .pcr-block,
+  .sus-block {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .sus-block.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .pcr-features {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  .pcr-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 899px) {
+  .approach-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .sus-card,
+  .pcr-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sus-hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .sus-approach,
+  .sus-block-section,
+  .sus-pcr-section {
+    padding: 3rem 0;
+  }
+
+  .sus-cta {
+    padding: 4rem 0;
+  }
+
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   8. ACCESSIBILITY & MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .sustainability-page,
+  .sustainability-page * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

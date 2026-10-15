@@ -1,0 +1,538 @@
+/* ============================================================
+   AGRO PAGE — Aditya Agro Print
+   Namespaced with .agro-  |  Self-contained brand tokens
+   ============================================================ */
+
+/* ---------- 0. VARIABLES & BASE ---------- */
+.agro-page {
+  --agro-ink: #111827;
+  --agro-ink-soft: #4b5563;
+  --agro-ink-light: #9ca3af;
+
+  --agro-primary: #a90091;
+  --agro-primary-dark: #7d006c;
+  --agro-primary-light: #bb3faa;
+  --agro-primary-soft: #fff5fe;
+  --agro-primary-glow: rgba(169, 0, 145, 0.18);
+
+  --agro-green: #16a34a;
+  --agro-green-dark: #15803d;
+  --agro-green-soft: #f0fdf4;
+
+  --agro-bg: #ffffff;
+  --agro-bg-alt: #fafafa;
+  --agro-line: #e5e7eb;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  color: var(--agro-ink);
+  background-color: var(--agro-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.agro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* ============================================================
+   1. HERO
+   ============================================================ */
+.agro-hero {
+  position: relative;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* isolation: isolate; */
+}
+
+.agro-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.agro-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.agro-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(17, 24, 39, 0.85) 0%,
+    rgba(17, 24, 39, 0.55) 55%,
+    rgba(17, 24, 39, 0.35) 100%
+  );
+}
+
+.agro-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  color: #fff;
+  padding: 6rem 0;
+  animation: agroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes agroFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.agro-hero-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.5rem;
+}
+
+.agro-breadcrumb-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.agro-breadcrumb-link:hover {
+  color: var(--agro-primary-light);
+  text-decoration: underline;
+}
+
+.agro-breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.agro-breadcrumb-current {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.agro-hero-title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+}
+
+.agro-text-accent {
+  color: var(--agro-primary-light);
+  display: inline;
+}
+
+.agro-hero-description {
+  font-size: clamp(1.05rem, 1.5vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 2.5rem;
+  max-width: 600px;
+}
+
+/* ============================================================
+   2. BUTTONS
+   ============================================================ */
+.agro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.9rem 1.9rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+}
+
+.agro-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.agro-btn-primary {
+  background-color: var(--agro-primary);
+  color: #ffffff;
+  box-shadow: 0 10px 24px -8px var(--agro-primary-glow);
+}
+
+.agro-btn-primary:hover {
+  background-color: var(--agro-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -8px var(--agro-primary-glow);
+}
+
+.agro-btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+.agro-btn-lg {
+  padding: 1rem 2.25rem;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   3. SECTION WRAPPER
+   ============================================================ */
+.agro-section {
+  padding: 5rem 0;
+  background-color: var(--agro-bg);
+}
+
+.agro-section-alt {
+  background-color: var(--agro-bg-alt);
+}
+
+/* ---------- Eyebrow ---------- */
+.agro-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--agro-primary);
+  margin-bottom: 0.9rem;
+}
+
+/* ---------- Headings ---------- */
+.agro-h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  font-weight: 800;
+  color: var(--agro-ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+.agro-lead {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--agro-ink-soft);
+  margin: 0 0 1.5rem;
+  max-width: 60ch;
+}
+
+.agro-emphasis {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--agro-ink);
+  margin: 0.5rem 0 0;
+}
+
+/* ---------- Section head ---------- */
+.agro-section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3.5rem;
+}
+
+.agro-section-head .agro-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   4. SPLIT LAYOUT
+   ============================================================ */
+.agro-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.agro-split-image {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -18px rgba(15, 23, 42, 0.2);
+  aspect-ratio: 4 / 3;
+  background-color: var(--agro-bg-alt);
+}
+
+.agro-split-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.agro-split-image:hover img {
+  transform: scale(1.04);
+}
+
+.agro-split-card {
+  padding: 0;
+}
+
+/* ---------- Pill row ---------- */
+.agro-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--agro-primary-soft);
+  border-left: 4px solid var(--agro-primary);
+  border-radius: 0 12px 12px 0;
+}
+
+.agro-pill {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--agro-primary-dark);
+  padding: 0.35rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid rgba(169, 0, 145, 0.15);
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   5. CHECKLIST
+   ============================================================ */
+.agro-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.agro-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--agro-ink-soft);
+}
+
+.agro-check {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--agro-primary-soft);
+  color: var(--agro-primary);
+  margin-top: 1px;
+}
+
+.agro-check svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   6. CATEGORY GRID
+   ============================================================ */
+.agro-category-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.agro-category-card {
+  background: #ffffff;
+  border: 1px solid var(--agro-line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
+}
+
+.agro-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -12px var(--agro-primary-glow);
+  border-color: rgba(169, 0, 145, 0.25);
+}
+
+.agro-category-image {
+  height: 170px;
+  overflow: hidden;
+  background: var(--agro-bg-alt);
+}
+
+.agro-category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.agro-category-card:hover .agro-category-image img {
+  transform: scale(1.08);
+}
+
+.agro-category-body {
+  padding: 1rem 1.1rem 1.15rem;
+  text-align: center;
+}
+
+.agro-category-body h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--agro-ink);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.agro-category-card:hover .agro-category-body h3 {
+  color: var(--agro-primary);
+}
+
+/* ============================================================
+   7. CTA
+   ============================================================ */
+.agro-cta {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-top: 1px solid var(--agro-line);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.agro-cta::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, var(--agro-primary-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.agro-cta .agro-container {
+  position: relative;
+  z-index: 1;
+}
+
+.agro-cta-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.agro-cta-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--agro-ink);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.agro-cta-text {
+  font-size: 1.125rem;
+  color: var(--agro-ink-soft);
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   8. RESPONSIVE
+   ============================================================ */
+@media (min-width: 600px) {
+  .agro-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .agro-split {
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+  }
+
+  .agro-split-reverse {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .agro-split-reverse .agro-split-image {
+    order: 2;
+  }
+
+  .agro-split-reverse .agro-split-card {
+    order: 1;
+  }
+
+  .agro-category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .agro-category-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .agro-hero {
+    min-height: 520px;
+  }
+
+  .agro-hero-content {
+    padding: 4rem 0;
+  }
+
+  .agro-section {
+    padding: 3.5rem 0;
+  }
+
+  .agro-cta {
+    padding: 4rem 0;
+  }
+
+  .agro-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .agro-pill-row {
+    padding: 0.85rem 1rem;
+  }
+}
+
+/* ============================================================
+   9. ACCESSIBILITY & MOTION
+   ============================================================ */
+.agro-btn:focus-visible,
+.agro-breadcrumb-link:focus-visible {
+  outline: 2px solid var(--agro-primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agro-page,
+  .agro-page * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,226 @@
+// pages/capabilities/Extrusion.tsx
+import './Extrusion.css';
+
+interface ApplicationItem {
+  label: string;
+}
+
+interface ExtrusionBlock {
+  id: string;
+  title: string;
+  description?: string;
+  subheading?: string;
+  applicationsTitle: string;
+  applications: string[];
+  image: string;
+  imagePosition: 'left' | 'right';
+}
+
+const blocks: ExtrusionBlock[] = [
+  {
+    id: 'monolayer',
+    title: 'Film Extrusion, Monolayer Blown Film',
+    description:
+      'We offer a diverse range of customized Monolayer Blown Film tailored to your specific requirements, including LD, LLD, HM, and HDPE options.',
+    applicationsTitle: 'Film Applications:',
+    applications: [
+      'Garbage Bags',
+      'Carry Bags',
+      'Shopping Bags',
+      'Liner Bags',
+      'Construction Film',
+      'T-Shirt Bags',
+      'Agriculture Film',
+      'General Purpose Film',
+      'Surface Printing Film',
+      'Lamination Film',
+      'LD Shrink Film',
+      'Stretch Hood Film',
+    ],
+    image:
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
+    imagePosition: 'left',
+  },
+  {
+    id: '3-layer',
+    title: 'Coextrusion – 3 Layer Film',
+    subheading: 'What are Coextruded Multilayer Films?',
+    description:
+      'Coextruded multi-layer films are produced through advanced compound moulding techniques. Multiple extruders simultaneously extrude thermoplastic resins, passing them through a single die to build precise layers of melted resin on both the inside and outside of the film.',
+    applicationsTitle: 'Film Applications:',
+    applications: [
+      'Shrink Film',
+      'Food Packaging Film',
+      'Mulch Film',
+      'Surface Protection Film',
+      'Agriculture Film',
+      'Vegetable Packing Film',
+      'Lamination Film',
+      'Stretch Hood Film',
+      'Stretch Film',
+    ],
+    image:
+      'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=800',
+    imagePosition: 'right',
+  },
+  {
+    id: '5-layer',
+    title: 'Coextrusion – 5 Layer Films',
+    description:
+      '5-layer films provide enhanced options and flexibility compared to 3-layer alternatives. These advanced films eliminate the need for secondary adhesive lamination steps with simple structures, streamlining production and reducing costs.',
+    applicationsTitle: 'Film Applications:',
+    applications: [
+      'Cereal Liner',
+      'Lidding & Tube Stock',
+      'Meat Packaging',
+      'Medical Devices',
+      'Frozen Food Packaging',
+      'Vegetable Packing Film',
+      'Lamination Film',
+      'Stretch Hood Film',
+      'Stretch Film',
+    ],
+    image:
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800',
+    imagePosition: 'left',
+  },
+  {
+    id: '7-layer',
+    title: 'High Barrier Co-Extruded Film – Coextrusion 7 Layer Films',
+    description:
+      '7-layer co-ex blown film lines address the majority of industry packaging development requirements. With improved barrier and strength properties, applications include films for long shelf-life packaging of edible oils, UHT milk, liquid and solid container liners, and technical applications. These versatile lines also produce films for lidding, frozen food packaging, meat packaging, and vacuum packaging.',
+    applicationsTitle: 'Vacuum Food Packaging Applications:',
+    applications: [
+      'Rice & Meat Products',
+      'Dried Fish & Aquatic Products',
+      'Salami',
+      'Roast Duck, Chicken & Pork',
+      'Frozen Food & Ham',
+      'Cooked Meat Products',
+      'Pickles & Bean Paste',
+      'Seasonings',
+      'Cured Meat Products',
+      'Sausages',
+    ],
+    image:
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800',
+    imagePosition: 'right',
+  },
+  {
+    id: '9-layer',
+    title: 'Coextrusion – 9 Layer Films',
+    description:
+      '9-layer rigid, high-barrier structures utilize cost and performance-optimized PE resins. The thickness of nylon layers controls modulus. Similar to 7-layer structures, the skin layers can be split into two layers to optimize cost and performance for specific applications, particularly thermoform-fill-seal processes.',
+    applicationsTitle: 'Applications:',
+    applications: [
+      'Fresh Meat',
+      'Sausage',
+      'Seafood',
+      'Cheese',
+      'Sauce',
+      'Snacks',
+    ],
+    image:
+      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800',
+    imagePosition: 'left',
+  },
+];
+
+const Extrusion = () => {
+  return (
+    <div className="extrusion-page">
+      {/* 1. Hero Banner with Breadcrumb */}
+      <section className="capabilities-hero">
+        <div className="hero-inner">
+          <div className="breadcrumb-card">
+            <h1>Extrusion</h1>
+            <nav className="breadcrumb" aria-label="Breadcrumb">
+              <span>Home</span>
+              <span className="breadcrumb-arrow">→</span>
+              <span className="breadcrumb-current">Capabilities</span>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Detail Blocks */}
+      <section className="extrusion-content">
+        <div className="container">
+          {blocks.map((block) => (
+            <div
+              key={block.id}
+              className={`extrusion-block ${
+                block.imagePosition === 'right' ? 'reverse' : ''
+              }`}
+            >
+              <div className="extrusion-image-wrapper">
+                <img src={block.image} alt={block.title} loading="lazy" />
+              </div>
+
+              <div className="extrusion-info-card">
+                <h2>{block.title}</h2>
+
+                {block.subheading && (
+                  <h4 className="extrusion-subheading">
+                    {block.subheading}
+                  </h4>
+                )}
+
+                {block.description && (
+                  <p className="extrusion-description">{block.description}</p>
+                )}
+
+                <div className="applications-section">
+                  <h4 className="applications-title">
+                    {block.applicationsTitle}
+                  </h4>
+                  <ul className="applications-grid">
+                    {block.applications.map((app, i) => (
+                      <li key={i} className="application-item">
+                        <span className="app-arrow">→</span>
+                        <span>{app}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. CTA Section */}
+      <section className="capabilities-cta">
+        <div className="container">
+          <div className="cta-heading-wrapper">
+            <h2 className="outline-text">Contact Now</h2>
+            <h2 className="solid-text">
+              Looking for Reliable Packaging Solutions?
+            </h2>
+          </div>
+          <p className="cta-text">
+            From film production to pouch manufacturing, we provide complete
+            end-to-end packaging services under one roof.
+          </p>
+          <button className="cta-btn">
+            Get In Touch
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="cta-arrow"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Extrusion;

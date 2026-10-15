@@ -1,0 +1,11 @@
+/* App-level wrapper — layout only */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding-top: 0;
+}

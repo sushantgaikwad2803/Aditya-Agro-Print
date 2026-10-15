@@ -1,0 +1,176 @@
+// pages/capabilities/QualityAssurance.tsx
+import './QualityAssurance.css';
+
+interface TestItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+const tests: TestItem[] = [
+  {
+    id: 1,
+    title: 'Interlayer Adhesion Testing',
+    description:
+      'To test the adhesion level of layers of the packaging film structure.',
+    image:
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+  {
+    id: 2,
+    title: 'Puncture Resistance Testing',
+    description:
+      'To evaluate how much pressure is needed to puncture the flexible packaging material.',
+    image:
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+  {
+    id: 3,
+    title: 'Tensile Testing',
+    description:
+      'To indicate how much a material can be stretched and how much force is needed to break the material.',
+    image:
+      'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+  {
+    id: 4,
+    title: 'Strength Testing',
+    description:
+      'To analyze how well the performs and how well it keeps the package enclosed within a given period.',
+    image:
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+  {
+    id: 5,
+    title: 'Burst Testing',
+    description:
+      'To determine the maximum pressure at which a pouch will burst.',
+    image:
+      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+  {
+    id: 6,
+    title: 'Drop Testing',
+    description:
+      'To test the adhesion level of layers of the To determine the height from which the pouch can be dropped without failing.',
+    image:
+      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=500&h=350',
+  },
+];
+
+const QualityAssurance = () => {
+  return (
+    <div className="quality-page">
+      {/* 1. Hero Banner with Breadcrumb */}
+      <section className="capabilities-hero">
+        <div className="hero-inner">
+          <div className="breadcrumb-card">
+            <h1>Quality Assurance</h1>
+            <nav className="breadcrumb" aria-label="Breadcrumb">
+              <span>Home</span>
+              <span className="breadcrumb-arrow">→</span>
+              <span className="breadcrumb-current">Capabilities</span>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Intro Block (Image + Description) */}
+      <section className="quality-intro">
+        <div className="container">
+          <div className="quality-intro-block">
+            <div className="quality-intro-image">
+              <img
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                alt="Quality Assurance Laboratory"
+              />
+            </div>
+
+            <div className="quality-intro-card">
+              <p>
+                Flexible Packaging are evolving rapidly to keep up with the
+                innovations in the products they protect. With the drive towards
+                new innovative packaging technologies, sustainable packaging,
+                reseal ability, and lightweighting, there are high demands on
+                package quality assurance and quality control (QA/QC). You need
+                QA/QC tools that keep up with the pace of new packaging.
+              </p>
+              <p>
+                Here at Net benefit ltd, our high precision package testing
+                instruments, coupled with our product and applications experts,
+                provide you the packaging system QA/QC you need. Being an
+                industry leader in whole package permeability testing, package
+                integrity and leak detection, headspace gas monitoring and
+                control, we have the up-to-date QA/QC tools to ensure your
+                package systems work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Testing Grid Section */}
+      <section className="quality-tests-section">
+        <div className="container">
+          <div className="quality-tests-heading">
+            <h2 className="outline-text">Net Benefit</h2>
+            <h2 className="solid-text">Your Packaging Reliable</h2>
+            <p className="quality-tests-subtitle">
+              We have an on-site analytical laboratory with the latest testing
+              equipment and skillful testers, which ensures that your flexible
+              packaging functions properly and has reliable performance
+            </p>
+          </div>
+
+          <div className="quality-tests-grid">
+            {tests.map((test) => (
+              <article key={test.id} className="quality-test-card">
+                <div className="quality-test-image-wrapper">
+                  <img src={test.image} alt={test.title} loading="lazy" />
+                </div>
+                <div className="quality-test-content">
+                  <h3>{test.title}</h3>
+                  <p>{test.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CTA Section */}
+      <section className="capabilities-cta">
+        <div className="container">
+          <div className="cta-heading-wrapper">
+            <h2 className="outline-text">Contact Now</h2>
+            <h2 className="solid-text">
+              Looking for Reliable Packaging Solutions?
+            </h2>
+          </div>
+          <p className="cta-text">
+            From film production to pouch manufacturing, we provide complete
+            end-to-end packaging services under one roof.
+          </p>
+          <button className="cta-btn">
+            Get In Touch
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="cta-arrow"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default QualityAssurance;

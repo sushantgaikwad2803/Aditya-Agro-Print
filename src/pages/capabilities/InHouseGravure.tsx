@@ -1,6 +1,23 @@
 // pages/capabilities/InHouseGravure.tsx
 import './InHouseGravure.css';
 
+interface HighlightItem {
+  label: string;
+  value: string;
+}
+
+const highlights: HighlightItem[] = [
+  { label: 'Engraving Plant', value: 'Daetwyler, Germany' },
+  { label: 'Engraver', value: 'Ohio, USA' },
+  { label: 'Turnaround', value: 'Rapid & Reliable' },
+];
+
+const introParagraphs = [
+  'From concept to creation, our rotogravure cylinders ensure your designs shine with unparalleled clarity.',
+  'In-house cylinder engraving plant with modern machinery from Daetwyler, Germany ensures precision & quick turnaround.',
+  'World-class Ohio engraver from the USA delivers exceptional detail & consistency.',
+];
+
 const InHouseGravure = () => {
   return (
     <div className="gravure-page">
@@ -8,6 +25,7 @@ const InHouseGravure = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>In-House Gravure Cylinder</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -23,25 +41,40 @@ const InHouseGravure = () => {
         <div className="container">
           <div className="gravure-intro-block">
             <div className="gravure-intro-image">
-              <img
-                src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=800"
-                alt="In-House Gravure Cylinders"
-              />
+              <span className="gravure-badge">Rotogravure</span>
+              <div className="gravure-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=800"
+                  alt="In-House Gravure Cylinders"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div className="gravure-intro-card">
-              <p>
-                From concept to creation, our rotogravure cylinders ensure your
-                designs shine with unparalleled clarity.
-              </p>
-              <p>
-                In house cylinder engraving plant which is modern machinery from
-                Daetwyler, Germany ensures precision &amp; quick turnaround.
-              </p>
-              <p>
-                World Class Ohio engraver from USA delivers exceptional details
-                &amp; consistency.
-              </p>
+              <span className="block-index">01</span>
+              <h2 className="gravure-intro-title">
+                Precision Cylinders, Crafted In-House
+              </h2>
+
+              <div className="gravure-intro-copy">
+                {introParagraphs.map((text, i) => (
+                  <p key={i}>{text}</p>
+                ))}
+              </div>
+
+              <ul className="gravure-highlights">
+                {highlights.map((item, i) => (
+                  <li key={i} className="gravure-highlight-item">
+                    <span className="gravure-highlight-label">
+                      {item.label}
+                    </span>
+                    <span className="gravure-highlight-value">
+                      {item.value}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -51,7 +84,7 @@ const InHouseGravure = () => {
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -67,6 +100,7 @@ const InHouseGravure = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

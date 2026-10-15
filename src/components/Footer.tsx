@@ -48,6 +48,58 @@ const quickLinks: FooterLink[] = [
   { label: "Contact Us", to: "/contact" },
 ];
 
+interface ContactItem {
+  icon: "location" | "phone" | "mail";
+  label: string;
+  value: string;
+  href?: string;
+}
+
+const contactItems: ContactItem[] = [
+  {
+    icon: "location",
+    label: "Address",
+    value:
+      "M.No.2205, Ward No.02, Bamnoli, Sangli, Tal. Miraj, Dist. Sangli, Maharashtra 416410",
+  },
+  {
+    icon: "phone",
+    label: "Phone",
+    value: "+91 84376 77830",
+    href: "tel:+918437677830",
+  },
+  {
+    icon: "mail",
+    label: "Email",
+    value: "adityaagroprintind55@gmail.com",
+    href: "mailto:adityaagroprintind55@gmail.com",
+  },
+];
+
+const ContactIcon = ({ name }: { name: ContactItem["icon"] }) => {
+  if (name === "location") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    );
+  }
+  if (name === "phone") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 7l9 6 9-6" />
+    </svg>
+  );
+};
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -56,7 +108,6 @@ export default function Footer() {
     e.preventDefault();
     const trimmed = email.trim();
 
-    // Simple client-side validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmed)) {
       setStatus("error");
@@ -67,13 +118,13 @@ export default function Footer() {
     console.log("Subscribing:", trimmed);
     setStatus("success");
     setEmail("");
-
-    // Reset status after 3s
     setTimeout(() => setStatus("idle"), 3000);
   };
 
   return (
     <footer className="footer" id="contact-footer">
+      <div className="footer-glow" aria-hidden="true" />
+
       <div className="container">
         <div className="footer-grid">
           {/* ---------- BRAND ---------- */}
@@ -103,6 +154,7 @@ export default function Footer() {
                     width="18"
                     height="18"
                     fill="currentColor"
+                    aria-hidden="true"
                   >
                     <path d={s.svg} />
                   </svg>
@@ -112,43 +164,56 @@ export default function Footer() {
           </div>
 
           {/* ---------- QUICK LINKS ---------- */}
-          <div className="footer-links">
+          <nav className="footer-links" aria-label="Footer navigation">
             <h4>Quick Links</h4>
-            {quickLinks.map((l) => (
-              <Link key={l.label} to={l.to}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
+            <ul>
+              {quickLinks.map((l) => (
+                <li key={l.label}>
+                  <Link to={l.to}>
+                    <span className="link-arrow" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="currentColor" width="10" height="10">
+                        <path
+                          fillRule="evenodd"
+                          d="M7.293 4.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586L7.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* ---------- CONTACT ---------- */}
           <div className="footer-contact">
             <h4>Contact Info</h4>
-            <p>
-              <span className="icon">📍</span>
-              <span>
-                M.No.2205, Ward No.02, Bamnoli, Sangli, Tal. Miraj, Dist.
-                Sangli, Maharashtra 416410
-              </span>
-            </p>
-            <p>
-              <span className="icon">📞</span>
-              <a href="tel:+918437677830">+91 8437677830</a>
-            </p>
-            <p>
-              <span className="icon">✉️</span>
-              <a href="mailto:adityaagroprintind55@gmail.com">
-                adityaagroprintind55@gmail.com
-              </a>
-            </p>
+            <ul>
+              {contactItems.map((item, i) => (
+                <li key={i} className="contact-item">
+                  <span className="contact-icon" aria-hidden="true">
+                    <ContactIcon name={item.icon} />
+                  </span>
+                  <div className="contact-body">
+                    <span className="contact-label">{item.label}</span>
+                    {item.href ? (
+                      <a href={item.href}>{item.value}</a>
+                    ) : (
+                      <span className="contact-value">{item.value}</span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* ---------- NEWSLETTER ---------- */}
           <div className="footer-newsletter">
             <h4>Newsletter</h4>
             <p>
-              Sign up our newsletter to get update information, news and free
-              insight.
+              Sign up to our newsletter for updates, news, and free industry
+              insights.
             </p>
 
             <form className="input-group" onSubmit={handleSubscribe}>
@@ -161,28 +226,41 @@ export default function Footer() {
                   if (status !== "idle") setStatus("idle");
                 }}
                 aria-label="Email address"
+                aria-invalid={status === "error"}
               />
               <button type="submit" aria-label="Subscribe">
-                {status === "success" ? "✓" : "✈"}
+                {status === "success" ? (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" aria-hidden="true">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                  </svg>
+                )}
               </button>
             </form>
 
-            {status === "success" && (
-              <p className="newsletter-msg success">
-                Thank you for subscribing!
-              </p>
-            )}
-            {status === "error" && (
-              <p className="newsletter-msg error">
-                Please enter a valid email address.
-              </p>
-            )}
+            <div className="newsletter-feedback" role="status" aria-live="polite">
+              {status === "success" && (
+                <p className="newsletter-msg success">
+                  Thank you for subscribing!
+                </p>
+              )}
+              {status === "error" && (
+                <p className="newsletter-msg error">
+                  Please enter a valid email address.
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          Copyright © {new Date().getFullYear()} Aditya Agro Print Ind Ltd. All
-          rights reserved.
+          <span>
+            Copyright © {new Date().getFullYear()} Aditya Agro Print Ind Ltd.
+            All rights reserved.
+          </span>
         </div>
       </div>
     </footer>

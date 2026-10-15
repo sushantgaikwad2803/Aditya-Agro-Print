@@ -1,6 +1,33 @@
 // pages/capabilities/ShippingLogistics.tsx
 import './ShippingLogistics.css';
 
+interface FeatureItem {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const features: FeatureItem[] = [
+  {
+    id: 1,
+    title: 'Global Coverage',
+    description:
+      'International and domestic logistics handled for every order, regardless of size.',
+  },
+  {
+    id: 2,
+    title: 'Safe Transit',
+    description:
+      'Your packaging travels from the manufacturing plant to your location safely and cost-effectively.',
+  },
+  {
+    id: 3,
+    title: 'On-Time Delivery',
+    description:
+      'We maintain the highest delivery timeliness standards so your business never runs out of packaging.',
+  },
+];
+
 const ShippingLogistics = () => {
   return (
     <div className="shipping-page">
@@ -8,6 +35,7 @@ const ShippingLogistics = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>Shipping &amp; Logistics</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -23,17 +51,23 @@ const ShippingLogistics = () => {
         <div className="container">
           <div className="shipping-intro-block">
             <div className="shipping-intro-image">
-              <img
-                src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80&w=800"
-                alt="Warehouse and Shipping Operations"
-              />
+              <span className="shipping-badge">End-to-End</span>
+              <div className="shipping-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80&w=800"
+                  alt="Warehouse and Shipping Operations"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div className="shipping-intro-card">
-              <p>
+              <span className="block-index">01</span>
+              <h2>Reliable Delivery, Every Order</h2>
+              <p className="shipping-intro-copy">
                 We handle all international and domestic logistics for every
-                order, regardless of size. We ensure your packaging travels from
-                the manufacturing plant to your location safely and
+                order, regardless of size. We ensure your packaging travels
+                from the manufacturing plant to your location safely and
                 cost-effectively. Nothing disrupts business like running out of
                 packaging when you need to sell products, so we maintain the
                 highest delivery timeliness standards.
@@ -43,11 +77,37 @@ const ShippingLogistics = () => {
         </div>
       </section>
 
-      {/* 3. CTA Section */}
+      {/* 3. Features Section */}
+      <section className="shipping-features-section">
+        <div className="container">
+          <div className="shipping-features-heading">
+            <span className="section-eyebrow">What We Deliver</span>
+            <h2 className="section-title">Logistics You Can Count On</h2>
+            <p className="section-subtitle">
+              From the plant floor to your facility — a seamless, dependable
+              shipping experience built on speed, safety, and consistency.
+            </p>
+          </div>
+
+          <div className="shipping-features-grid">
+            {features.map((feature) => (
+              <article key={feature.id} className="shipping-feature-card">
+                <span className="shipping-feature-index">
+                  {String(feature.id).padStart(2, '0')}
+                </span>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CTA Section */}
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -63,6 +123,7 @@ const ShippingLogistics = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

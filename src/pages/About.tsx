@@ -182,7 +182,7 @@ const About = () => {
             </h1>
 
             <p className="about-hero-description">
-              Net Benefit is a Mumbai-based flexible packaging partner serving
+              Aditya Agro Print is a Mumbai-based flexible packaging partner serving
               industries across food, retail, industrial, and hospitality
               sectors. We combine material expertise, global sourcing, and
               process control to deliver packaging that performs at scale.
@@ -211,7 +211,7 @@ const About = () => {
                 Three decades of packaging expertise.
               </h2>
               <p className="about-lead">
-                Net Benefit is a flexible packaging supplier serving customers
+                Aditya Agro Print is a flexible packaging supplier serving customers
                 globally across diverse industries, including retail, food
                 service, industrial, and hospitality sectors.
               </p>
@@ -378,7 +378,7 @@ const About = () => {
         <div className="container">
           <header className="about-section-head">
             <span className="about-eyebrow">Why Choose Us</span>
-            <h2 className="about-h2">Why Choose Net Benefit?</h2>
+            <h2 className="about-h2">Why Choose Aditya Agro Print?</h2>
             <p className="about-lead">
               We are a one-stop solution to help your business scale higher.
             </p>

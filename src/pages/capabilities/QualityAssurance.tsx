@@ -37,7 +37,7 @@ const tests: TestItem[] = [
     id: 4,
     title: 'Strength Testing',
     description:
-      'To analyze how well the performs and how well it keeps the package enclosed within a given period.',
+      'To analyze how well the package performs and how well it keeps the product enclosed within a given period.',
     image:
       'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=500&h=350',
   },
@@ -53,10 +53,15 @@ const tests: TestItem[] = [
     id: 6,
     title: 'Drop Testing',
     description:
-      'To test the adhesion level of layers of the To determine the height from which the pouch can be dropped without failing.',
+      'To determine the height from which the pouch can be dropped without failing.',
     image:
       'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=500&h=350',
   },
+];
+
+const introParagraphs = [
+  'Flexible Packaging are evolving rapidly to keep up with the innovations in the products they protect. With the drive towards new innovative packaging technologies, sustainable packaging, reseal ability, and lightweighting, there are high demands on package quality assurance and quality control (QA/QC). You need QA/QC tools that keep up with the pace of new packaging.',
+  'Here at Aditya Agro Print Ltd, our high precision package testing instruments, coupled with our product and applications experts, provide you the packaging system QA/QC you need. Being an industry leader in whole package permeability testing, package integrity and leak detection, headspace gas monitoring and control, we have the up-to-date QA/QC tools to ensure your package systems work.',
 ];
 
 const QualityAssurance = () => {
@@ -66,6 +71,7 @@ const QualityAssurance = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>Quality Assurance</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -81,30 +87,24 @@ const QualityAssurance = () => {
         <div className="container">
           <div className="quality-intro-block">
             <div className="quality-intro-image">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
-                alt="Quality Assurance Laboratory"
-              />
+              <span className="quality-badge">On-Site Lab</span>
+              <div className="quality-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                  alt="Quality Assurance Laboratory"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div className="quality-intro-card">
-              <p>
-                Flexible Packaging are evolving rapidly to keep up with the
-                innovations in the products they protect. With the drive towards
-                new innovative packaging technologies, sustainable packaging,
-                reseal ability, and lightweighting, there are high demands on
-                package quality assurance and quality control (QA/QC). You need
-                QA/QC tools that keep up with the pace of new packaging.
-              </p>
-              <p>
-                Here at Net benefit ltd, our high precision package testing
-                instruments, coupled with our product and applications experts,
-                provide you the packaging system QA/QC you need. Being an
-                industry leader in whole package permeability testing, package
-                integrity and leak detection, headspace gas monitoring and
-                control, we have the up-to-date QA/QC tools to ensure your
-                package systems work.
-              </p>
+              <span className="block-index">01</span>
+              <h2>Precision QA/QC You Can Rely On</h2>
+              <div className="quality-intro-copy">
+                {introParagraphs.map((text, i) => (
+                  <p key={i}>{text}</p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -114,12 +114,12 @@ const QualityAssurance = () => {
       <section className="quality-tests-section">
         <div className="container">
           <div className="quality-tests-heading">
-            <h2 className="outline-text">Net Benefit</h2>
-            <h2 className="solid-text">Your Packaging Reliable</h2>
-            <p className="quality-tests-subtitle">
+            <span className="section-eyebrow">Aditya Agro Print</span>
+            <h2 className="section-title">Your Packaging, Reliable</h2>
+            <p className="section-subtitle">
               We have an on-site analytical laboratory with the latest testing
               equipment and skillful testers, which ensures that your flexible
-              packaging functions properly and has reliable performance
+              packaging functions properly and has reliable performance.
             </p>
           </div>
 
@@ -128,6 +128,9 @@ const QualityAssurance = () => {
               <article key={test.id} className="quality-test-card">
                 <div className="quality-test-image-wrapper">
                   <img src={test.image} alt={test.title} loading="lazy" />
+                  <span className="quality-test-index">
+                    {String(test.id).padStart(2, '0')}
+                  </span>
                 </div>
                 <div className="quality-test-content">
                   <h3>{test.title}</h3>
@@ -143,7 +146,7 @@ const QualityAssurance = () => {
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -159,6 +162,7 @@ const QualityAssurance = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

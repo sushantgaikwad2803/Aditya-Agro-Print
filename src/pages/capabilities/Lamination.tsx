@@ -24,7 +24,11 @@ const laminationTypesRight: LaminationType[] = [
   { id: 12, label: 'NYLON / PE 7-LAYER CO-EXTRUDE' },
   { id: 13, label: 'EVOH / PE 7-LAYER CO-EXTRUDE' },
   { id: 14, label: 'THERMAL FORMING FILM NYLON / PE 7-LAYER CO-EXTRUDE' },
-  { id: 15, label: 'HIGH BARRIER THERMAL FORMING FILM NYLON / PE 7-9 LAYER COEXTRUDE' },
+  {
+    id: 15,
+    label:
+      'HIGH BARRIER THERMAL FORMING FILM NYLON / PE 7-9 LAYER COEXTRUDE',
+  },
 ];
 
 const Lamination = () => {
@@ -34,6 +38,7 @@ const Lamination = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>Lamination</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -49,21 +54,27 @@ const Lamination = () => {
         <div className="container">
           <div className="lamination-intro-block">
             <div className="lamination-intro-image">
-              <img
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
-                alt="Solventless Lamination Machine"
-              />
+              <span className="lamination-badge">Adhesive &amp; Extrusion</span>
+              <div className="lamination-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
+                  alt="Solventless Lamination Machine"
+                  loading="lazy"
+                />
+              </div>
             </div>
+
             <div className="lamination-intro-card">
+              <span className="block-index">01</span>
               <h2>Lamination Types</h2>
               <p>
-                Net Benefit utilizes all material types to fulfil comprehensive
-                packaging needs. Materials are available as unprinted film or
-                with excellent print graphics, and can be laminated to any
-                other material type. We employ adhesive or extrusion lamination
-                to combine properties of different substrates, maximizing
-                graphics appeal, shelf-life requirements, or machine
-                performance.
+                Aditya Agro Print utilizes all material types to fulfil
+                comprehensive packaging needs. Materials are available as
+                unprinted film or with excellent print graphics, and can be
+                laminated to any other material type. We employ adhesive or
+                extrusion lamination to combine properties of different
+                substrates, maximizing graphics appeal, shelf-life
+                requirements, or machine performance.
               </p>
             </div>
           </div>
@@ -73,13 +84,34 @@ const Lamination = () => {
       {/* 3. Lamination Types List */}
       <section className="lamination-list-section">
         <div className="container">
+          <div className="lamination-list-heading">
+            <h3>Available Combinations</h3>
+            <span className="lamination-count">
+              {laminationTypesLeft.length + laminationTypesRight.length}{' '}
+              Structures
+            </span>
+          </div>
+
           <div className="lamination-list-grid">
             {/* Left Column */}
             <ul className="lamination-list">
               {laminationTypesLeft.map((item) => (
                 <li key={item.id} className="lamination-list-item">
                   <span className="lamination-label">{item.label}</span>
-                  <span className="lamination-plus">+</span>
+                  <span className="lamination-plus" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      width="12"
+                      height="12"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 4.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586L7.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -89,7 +121,20 @@ const Lamination = () => {
               {laminationTypesRight.map((item) => (
                 <li key={item.id} className="lamination-list-item">
                   <span className="lamination-label">{item.label}</span>
-                  <span className="lamination-plus">+</span>
+                  <span className="lamination-plus" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      width="12"
+                      height="12"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 4.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586L7.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -101,7 +146,7 @@ const Lamination = () => {
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -117,6 +162,7 @@ const Lamination = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

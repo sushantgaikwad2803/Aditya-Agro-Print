@@ -157,7 +157,7 @@
   transition:
     background-color 0.3s ease,
     transform 0.25s ease,
-    box-shadow 0.3s ease,
+    box-shadow 0.3s ease, 
     color 0.3s ease;
 }
 
@@ -290,6 +290,7 @@
   background: var(--agro-primary-soft);
   border-left: 4px solid var(--agro-primary);
   border-radius: 0 12px 12px 0;
+  list-style-type: none;
 }
 
 .agro-pill {
@@ -301,6 +302,7 @@
   border: 1px solid rgba(169, 0, 145, 0.15);
   border-radius: 9999px;
   white-space: nowrap;
+
 }
 
 /* ============================================================

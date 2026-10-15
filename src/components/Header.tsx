@@ -4,10 +4,15 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../assets/logo.jpeg";
 
+interface NavChild {
+  label: string;
+  to: string;
+}
+
 interface NavItem {
   label: string;
   to: string;
-  children?: { label: string; to: string }[];
+  children?: NavChild[];
 }
 
 const navItems: NavItem[] = [
@@ -52,14 +57,7 @@ const navItems: NavItem[] = [
   },
   { label: "Services", to: "/services" },
   { label: "Sustainability", to: "/sustainability" },
-  {
-    label: "About Us",
-    to: "/about",
-    children: [
-      { label: "Who We Are", to: "/about" },
-      { label: "Contact Us", to: "/contact" },
-    ],
-  },
+  { label: "About Us", to: "/about" },
 ];
 
 export default function Header() {
@@ -134,7 +132,7 @@ export default function Header() {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="container nav-wrapper">
-        {/* Logo */}
+        {/* Logo + Company Name */}
         <Link
           to="/"
           className="logo-wrapper"
@@ -142,10 +140,18 @@ export default function Header() {
           aria-label="Aditya Agro Print — Home"
         >
           <img className="logo-img" src={logo} alt="Aditya Agro Print Logo" />
+
+          <span className="logo-text">
+            <span className="logo-text-main">Aditya Agro Print Ind Ltd</span>
+            <span className="logo-text-tag">Connecting Dots, Driving Excellence</span>
+          </span>
         </Link>
 
         {/* Nav Links */}
-        <div className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <div
+          id="primary-navigation"
+          className={`nav-links ${menuOpen ? "active" : ""}`}
+        >
           {navItems.map((item) => {
             const isSectionActive =
               item.to !== "/" && location.pathname.startsWith(item.to);
@@ -232,7 +238,11 @@ export default function Header() {
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen((v) => !v)}
         >
-          {menuOpen ? "✕" : "☰"}
+          <span className={`menu-icon ${menuOpen ? "open" : ""}`}>
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
       </div>
     </nav>

@@ -58,6 +58,11 @@ const pouchStyles: PouchStyle[] = [
   },
 ];
 
+const introParagraphs = [
+  'Laminated pouches are the optimal choice when it comes to having your product stand out from the rest. They are compatible with all food and pet food items including solids, liquids, granulates, and powders.',
+  'Our professional sales people gladly assist with selecting the structure that best suits your product. Foil, paper, polyester, and nylon are among the material layers you may be advised to use. Choose from a variety of closures and spouts which will make your packaging more friendly to consumers. A high-gloss or matte finish will complete the look of your carefully created packaging design.',
+];
+
 const PouchManufacturing = () => {
   return (
     <div className="pouch-mfg-page">
@@ -65,6 +70,7 @@ const PouchManufacturing = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>Pouch Manufacturing</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -80,28 +86,24 @@ const PouchManufacturing = () => {
         <div className="container">
           <div className="pouch-intro-block">
             <div className="pouch-intro-image">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
-                alt="HFFS Pouch Making Machines"
-              />
+              <span className="pouch-badge">HFFS Machinery</span>
+              <div className="pouch-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                  alt="HFFS Pouch Making Machines"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div className="pouch-intro-card">
-              <p>
-                Laminated pouches are the optimal choice when it comes to having
-                your product stand out from the rest. They are compatible with
-                all food and pet food items including solids, liquids,
-                granulates, and powders.
-              </p>
-              <p>
-                Our professional sales people gladly assist with selecting the
-                structure that best suits your product. Foil, paper, polyester,
-                and nylon are among the material layers you may be advised to
-                use. Choose from a variety of closures and spouts which will
-                make your packaging more friendly to consumers. A high-gloss or
-                matte finish will complete the look of your carefully created
-                packaging design.
-              </p>
+              <span className="block-index">01</span>
+              <h2>Laminated Pouch Solutions</h2>
+              <div className="pouch-intro-copy">
+                {introParagraphs.map((text, i) => (
+                  <p key={i}>{text}</p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -111,8 +113,12 @@ const PouchManufacturing = () => {
       <section className="pouch-styles-section">
         <div className="container">
           <div className="pouch-styles-heading">
-            <h2 className="outline-text">Net Benefit</h2>
-            <h2 className="solid-text">Pouch Styles</h2>
+            <span className="section-eyebrow">Aditya Agro Print</span>
+            <h2 className="section-title">Pouch Styles</h2>
+            <p className="section-subtitle">
+              A versatile range of pouch formats engineered for shelf appeal,
+              barrier performance, and consumer convenience.
+            </p>
           </div>
 
           <div className="pouch-styles-grid">
@@ -120,9 +126,26 @@ const PouchManufacturing = () => {
               <article key={style.id} className="pouch-style-card">
                 <div className="pouch-style-image-wrapper">
                   <img src={style.image} alt={style.title} loading="lazy" />
+                  <span className="pouch-style-index">
+                    {String(style.id).padStart(2, '0')}
+                  </span>
                 </div>
                 <div className="pouch-style-content">
                   <h3>{style.title}</h3>
+                  <span className="pouch-style-arrow" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      width="14"
+                      height="14"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 4.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586L7.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                 </div>
               </article>
             ))}
@@ -134,7 +157,7 @@ const PouchManufacturing = () => {
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -150,6 +173,7 @@ const PouchManufacturing = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

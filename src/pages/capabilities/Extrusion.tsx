@@ -1,10 +1,6 @@
 // pages/capabilities/Extrusion.tsx
 import './Extrusion.css';
 
-interface ApplicationItem {
-  label: string;
-}
-
 interface ExtrusionBlock {
   id: string;
   title: string;
@@ -14,15 +10,17 @@ interface ExtrusionBlock {
   applications: string[];
   image: string;
   imagePosition: 'left' | 'right';
+  badge?: string;
 }
 
 const blocks: ExtrusionBlock[] = [
   {
     id: 'monolayer',
     title: 'Film Extrusion, Monolayer Blown Film',
+    badge: 'Monolayer',
     description:
       'We offer a diverse range of customized Monolayer Blown Film tailored to your specific requirements, including LD, LLD, HM, and HDPE options.',
-    applicationsTitle: 'Film Applications:',
+    applicationsTitle: 'Film Applications',
     applications: [
       'Garbage Bags',
       'Carry Bags',
@@ -44,10 +42,11 @@ const blocks: ExtrusionBlock[] = [
   {
     id: '3-layer',
     title: 'Coextrusion – 3 Layer Film',
+    badge: '3 Layer',
     subheading: 'What are Coextruded Multilayer Films?',
     description:
       'Coextruded multi-layer films are produced through advanced compound moulding techniques. Multiple extruders simultaneously extrude thermoplastic resins, passing them through a single die to build precise layers of melted resin on both the inside and outside of the film.',
-    applicationsTitle: 'Film Applications:',
+    applicationsTitle: 'Film Applications',
     applications: [
       'Shrink Film',
       'Food Packaging Film',
@@ -66,9 +65,10 @@ const blocks: ExtrusionBlock[] = [
   {
     id: '5-layer',
     title: 'Coextrusion – 5 Layer Films',
+    badge: '5 Layer',
     description:
       '5-layer films provide enhanced options and flexibility compared to 3-layer alternatives. These advanced films eliminate the need for secondary adhesive lamination steps with simple structures, streamlining production and reducing costs.',
-    applicationsTitle: 'Film Applications:',
+    applicationsTitle: 'Film Applications',
     applications: [
       'Cereal Liner',
       'Lidding & Tube Stock',
@@ -86,10 +86,11 @@ const blocks: ExtrusionBlock[] = [
   },
   {
     id: '7-layer',
-    title: 'High Barrier Co-Extruded Film – Coextrusion 7 Layer Films',
+    title: 'High Barrier Co-Extruded Film',
+    badge: '7 Layer',
     description:
       '7-layer co-ex blown film lines address the majority of industry packaging development requirements. With improved barrier and strength properties, applications include films for long shelf-life packaging of edible oils, UHT milk, liquid and solid container liners, and technical applications. These versatile lines also produce films for lidding, frozen food packaging, meat packaging, and vacuum packaging.',
-    applicationsTitle: 'Vacuum Food Packaging Applications:',
+    applicationsTitle: 'Vacuum Food Packaging Applications',
     applications: [
       'Rice & Meat Products',
       'Dried Fish & Aquatic Products',
@@ -109,9 +110,10 @@ const blocks: ExtrusionBlock[] = [
   {
     id: '9-layer',
     title: 'Coextrusion – 9 Layer Films',
+    badge: '9 Layer',
     description:
       '9-layer rigid, high-barrier structures utilize cost and performance-optimized PE resins. The thickness of nylon layers controls modulus. Similar to 7-layer structures, the skin layers can be split into two layers to optimize cost and performance for specific applications, particularly thermoform-fill-seal processes.',
-    applicationsTitle: 'Applications:',
+    applicationsTitle: 'Applications',
     applications: [
       'Fresh Meat',
       'Sausage',
@@ -133,6 +135,7 @@ const Extrusion = () => {
       <section className="capabilities-hero">
         <div className="hero-inner">
           <div className="breadcrumb-card">
+            <span className="breadcrumb-eyebrow">Our Capabilities</span>
             <h1>Extrusion</h1>
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <span>Home</span>
@@ -146,18 +149,27 @@ const Extrusion = () => {
       {/* 2. Detail Blocks */}
       <section className="extrusion-content">
         <div className="container">
-          {blocks.map((block) => (
-            <div
+          {blocks.map((block, index) => (
+            <article
               key={block.id}
               className={`extrusion-block ${
                 block.imagePosition === 'right' ? 'reverse' : ''
               }`}
             >
               <div className="extrusion-image-wrapper">
-                <img src={block.image} alt={block.title} loading="lazy" />
+                {block.badge && (
+                  <span className="extrusion-badge">{block.badge}</span>
+                )}
+                <div className="extrusion-image-frame">
+                  <img src={block.image} alt={block.title} loading="lazy" />
+                </div>
               </div>
 
               <div className="extrusion-info-card">
+                <span className="block-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
                 <h2>{block.title}</h2>
 
                 {block.subheading && (
@@ -177,14 +189,27 @@ const Extrusion = () => {
                   <ul className="applications-grid">
                     {block.applications.map((app, i) => (
                       <li key={i} className="application-item">
-                        <span className="app-arrow">→</span>
+                        <span className="app-arrow" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            width="12"
+                            height="12"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M7.293 4.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586L7.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                         <span>{app}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
@@ -193,7 +218,7 @@ const Extrusion = () => {
       <section className="capabilities-cta">
         <div className="container">
           <div className="cta-heading-wrapper">
-            <h2 className="outline-text">Contact Now</h2>
+            <span className="cta-eyebrow">Let's Work Together</span>
             <h2 className="solid-text">
               Looking for Reliable Packaging Solutions?
             </h2>
@@ -209,6 +234,7 @@ const Extrusion = () => {
               className="cta-arrow"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

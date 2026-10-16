@@ -122,7 +122,7 @@ const detailBlocks: DetailBlock[] = [
 const whyChoose: WhyItem[] = [
   {
     icon: "M12 2a10 10 0 100 20 10 10 0 000-20z M12 6v6l4 2",
-    title: "30+ years of industry experience",
+    title: "15+ years of industry experience",
     description:
       "Providing expertise and proven solutions for over three decades",
   },

@@ -432,7 +432,7 @@ svg.svg-inline--fa {
 .hero-logo-badge {
   position: absolute;
   bottom: -12px;
-  right: 24px;
+  right: -5px;
   z-index: 3;
   width: 90px;
   height: 90px;
@@ -523,7 +523,7 @@ svg.svg-inline--fa {
 /* Icon ring — circular brand-tinted backdrop */
 .stats-bar-item .icon {
   display: inline-flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
   width: var(--icon-ring);
   height: var(--icon-ring);

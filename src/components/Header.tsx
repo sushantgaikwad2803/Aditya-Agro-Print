@@ -1,5 +1,5 @@
 // components/Header.tsx
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
 
@@ -52,6 +52,36 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  /* ------------------------------------------------------------------
+     Keep --hdr-actual-h in sync with the REAL rendered navbar height.
+     This is the fix for the "menu disappears / close button hidden
+     after scroll" bug — the mobile menu's `top` is now driven by the
+     measured height instead of a hardcoded breakpoint value.
+     ------------------------------------------------------------------ */
+  useEffect(() => {
+    const nav = document.querySelector<HTMLElement>(".navbar");
+    if (!nav) return;
+
+    const sync = () => {
+      const h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--hdr-actual-h", `${h}px`);
+    };
+
+    sync();
+
+    const ro = new ResizeObserver(sync);
+    ro.observe(nav);
+
+    window.addEventListener("orientationchange", sync);
+    window.addEventListener("resize", sync);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("orientationchange", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, []);
 
   /* Close everything on route change */
   useEffect(() => {
@@ -117,10 +147,22 @@ export default function Header() {
   };
 
   /* Backdrop click closes mobile menu */
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setMenuOpen(false);
     setOpenDropdown(null);
-  };
+  }, []);
+
+  /* Refresh the measured navbar height right before opening, then toggle */
+  const toggleMobileMenu = useCallback(() => {
+    const nav = document.querySelector<HTMLElement>(".navbar");
+    if (nav) {
+      document.documentElement.style.setProperty(
+        "--hdr-actual-h",
+        `${nav.getBoundingClientRect().height}px`
+      );
+    }
+    setMenuOpen((v) => !v);
+  }, []);
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
@@ -289,7 +331,7 @@ export default function Header() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
-          onClick={() => setMenuOpen((v) => !v)}
+          onClick={toggleMobileMenu}
         >
           <span className={`menu-icon ${menuOpen ? "open" : ""}`}>
             <span />

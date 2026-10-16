@@ -219,7 +219,7 @@ const About = () => {
               <hr className="about-divider" />
 
               <p className="about-lead">
-                With over 30 years of hands-on experience in the packaging
+                With over 15 years of hands-on experience in the packaging
                 industry, our team has been directly involved in manufacturing
                 operations supplying global brands.
               </p>
@@ -232,7 +232,7 @@ const About = () => {
 
               <div className="about-badges">
                 <div className="about-badge">
-                  <span className="badge-value">30+ Years</span>
+                  <span className="badge-value">15+ Years</span>
                   <span className="badge-label">Industry Experience</span>
                 </div>
                 <div className="about-badge">

@@ -1,5 +1,5 @@
 // components/Header.tsx
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
 
@@ -51,27 +51,27 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
   const location = useLocation();
 
   /* ------------------------------------------------------------------
-     Keep --hdr-actual-h in sync with the REAL rendered navbar height.
-     This is the fix for the "menu disappears / close button hidden
-     after scroll" bug — the mobile menu's `top` is now driven by the
-     measured height instead of a hardcoded breakpoint value.
+     1. Keep --hdr-actual-h in sync with the REAL rendered navbar height.
+        This ensures the mobile menu's `top` always matches the header,
+        even after scroll, breakpoint changes, or safe-area shifts.
      ------------------------------------------------------------------ */
   useEffect(() => {
-    const nav = document.querySelector<HTMLElement>(".navbar");
-    if (!nav) return;
+    const el = navRef.current;
+    if (!el) return;
 
     const sync = () => {
-      const h = nav.getBoundingClientRect().height;
+      const h = el.getBoundingClientRect().height;
       document.documentElement.style.setProperty("--hdr-actual-h", `${h}px`);
     };
 
     sync();
 
     const ro = new ResizeObserver(sync);
-    ro.observe(nav);
+    ro.observe(el);
 
     window.addEventListener("orientationchange", sync);
     window.addEventListener("resize", sync);
@@ -83,13 +83,13 @@ export default function Header() {
     };
   }, []);
 
-  /* Close everything on route change */
+  /* 2. Close everything on route change */
   useEffect(() => {
     setMenuOpen(false);
     setOpenDropdown(null);
   }, [location.pathname]);
 
-  /* Close dropdowns on outside click */
+  /* 3. Close dropdowns on outside click (desktop) */
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -99,7 +99,7 @@ export default function Header() {
     return () => document.removeEventListener("click", onDocClick);
   }, []);
 
-  /* Close mobile menu + dropdowns on resize (desktop breakpoint) */
+  /* 4. Reset mobile state when crossing back to desktop */
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 900) {
@@ -111,7 +111,7 @@ export default function Header() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  /* Escape key closes menu & dropdowns */
+  /* 5. Escape key closes everything */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -123,7 +123,7 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  /* Lock body scroll when mobile menu is open */
+  /* 6. Lock body scroll when mobile menu is open */
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -132,7 +132,7 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  /* Navbar shadow on scroll */
+  /* 7. Navbar shadow on scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -146,26 +146,27 @@ export default function Header() {
     setOpenDropdown((prev) => (prev === label ? null : label));
   };
 
-  /* Backdrop click closes mobile menu */
   const closeMobileMenu = useCallback(() => {
     setMenuOpen(false);
     setOpenDropdown(null);
   }, []);
 
-  /* Refresh the measured navbar height right before opening, then toggle */
   const toggleMobileMenu = useCallback(() => {
-    const nav = document.querySelector<HTMLElement>(".navbar");
-    if (nav) {
+    /* Re-measure right before opening to prevent a 1-frame jump */
+    if (navRef.current) {
       document.documentElement.style.setProperty(
         "--hdr-actual-h",
-        `${nav.getBoundingClientRect().height}px`
+        `${navRef.current.getBoundingClientRect().height}px`
       );
     }
     setMenuOpen((v) => !v);
   }, []);
 
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+    <nav
+      ref={navRef}
+      className={`navbar ${scrolled ? "scrolled" : ""}`}
+    >
       <div className="container nav-wrapper">
         {/* Brand */}
         <Link
@@ -201,29 +202,14 @@ export default function Header() {
           aria-hidden="true"
         />
 
-        {/* Nav links */}
+        {/* Primary navigation */}
         <div
           id="primary-navigation"
-          className={`nav-links ${menuOpen ? "active" : ""}`}
+          className={`primary-nav ${menuOpen ? "active" : ""}`}
         >
-          {/* Mobile menu header (close button row) */}
-          <div className="nav-links-mobile-head" aria-hidden="true">
+          {/* Mobile-only panel header */}
+          <div className="primary-nav-head" aria-hidden="true">
             <span>Menu</span>
-            <button
-              type="button"
-              className="nav-close-btn"
-              onClick={closeMobileMenu}
-              aria-label="Close menu"
-            >
-              <svg viewBox="0 0 20 20" fill="none" width="18" height="18">
-                <path
-                  d="M5 5l10 10M15 5L5 15"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
           </div>
 
           {navItems.map((item) => {
@@ -324,7 +310,7 @@ export default function Header() {
           <span>Get In Touch</span>
         </Link>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile menu toggle (single close control) */}
         <button
           type="button"
           className="menu-toggle"

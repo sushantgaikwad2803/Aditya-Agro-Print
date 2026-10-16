@@ -1,5 +1,9 @@
 /* ============================================================
-   HEADER — Aditya Agro Print (mobile-friendly + scroll-safe)
+   HEADER — Aditya Agro Print
+   ------------------------------------------------------------
+   Mobile menu class renamed from `.nav-links` → `.primary-nav`
+   to eliminate collisions with any other `.nav-links` styles
+   in the codebase.
    ============================================================ */
 
 :root {
@@ -26,14 +30,12 @@
   --hdr-header-h: 96px;
   --hdr-logo-size: 68px;
 
-  /* Safe area for notched phones */
   --hdr-safe-top: env(safe-area-inset-top, 0px);
   --hdr-safe-bottom: env(safe-area-inset-bottom, 0px);
   --hdr-safe-left: env(safe-area-inset-left, 0px);
   --hdr-safe-right: env(safe-area-inset-right, 0px);
 
-  /* ✅ Live-measured navbar height, kept in sync by JS.
-     Fallback = CSS-computed height (for no-JS / first paint). */
+  /* Live-measured navbar height (JS-synced). Fallback for no-JS. */
   --hdr-actual-h: calc(var(--hdr-header-h) + var(--hdr-safe-top));
 }
 
@@ -167,9 +169,9 @@
 }
 
 /* ============================================================
-   NAV LINKS (desktop)
+   PRIMARY NAV (desktop)
    ============================================================ */
-.nav-links {
+.primary-nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -268,12 +270,12 @@
   }
 }
 
-/* Mobile-only menu header (close button + "Menu" label) */
-.nav-links-mobile-head {
+/* Hidden by default; only visible inside the open mobile menu */
+.primary-nav-head {
   display: none;
 }
 
-/* Backdrop (mobile only) */
+/* Backdrop hidden by default; only visible on mobile when open */
 .nav-backdrop {
   display: none;
 }
@@ -619,10 +621,11 @@
   .nav-backdrop {
     display: block;
     position: fixed;
-    inset: 0;
-    /* ✅ Anchored to real navbar bottom (JS-synced) */
+    left: 0;
+    right: 0;
+    bottom: 0;
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
-    background-color: rgba(15, 23, 42, 0.4);
+    background-color: rgba(15, 23, 42, 0.45);
     opacity: 0;
     visibility: hidden;
     transition:
@@ -630,7 +633,7 @@
       visibility 0.3s var(--hdr-ease);
     z-index: 998;
     -webkit-tap-highlight-color: transparent;
-    touch-action: none; /* ✅ prevents iOS page scroll behind menu */
+    touch-action: none;
   }
 
   .nav-backdrop.active {
@@ -639,24 +642,26 @@
   }
 
   /* ---------- Slide-in menu from RIGHT ---------- */
-  .nav-links {
+  .primary-nav {
     position: fixed;
-    /* ✅ The fix: this now tracks the real rendered navbar height */
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
     right: 0;
     bottom: 0;
     left: auto;
     width: min(88vw, 380px);
     max-width: 100%;
-    max-height: 100dvh; /* ✅ prevents iOS rubber-band overflow */
+    height: auto;
+    max-height: calc(100dvh - var(--hdr-actual-h, var(--hdr-header-h)));
     background-color: var(--hdr-bg);
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
     gap: 0;
     flex: initial;
+    min-width: 0;
     padding: 0 0 calc(2rem + var(--hdr-safe-bottom));
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     transform: translateX(100%);
@@ -664,17 +669,26 @@
     z-index: 999;
     border-left: 1px solid var(--hdr-line);
     box-shadow: -20px 0 40px -20px rgba(0, 0, 0, 0.15);
+    visibility: hidden;
   }
 
-  .nav-links.active {
+  .primary-nav.active {
     transform: translateX(0);
+    visibility: visible;
   }
 
-  /* ---------- Mobile menu header ---------- */
-  .nav-links-mobile-head {
+  /* Prevent flex children from collapsing */
+  .primary-nav > .nav-item,
+  .primary-nav > .nav-btn-mobile,
+  .primary-nav > .primary-nav-head {
+    flex-shrink: 0;
+  }
+
+  /* ---------- Mobile panel header ---------- */
+  .primary-nav-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0.9rem 1.25rem;
     border-bottom: 1px solid var(--hdr-line-soft);
     font-size: 0.75rem;
@@ -686,33 +700,6 @@
     top: 0;
     background-color: var(--hdr-bg);
     z-index: 2;
-  }
-
-  .nav-close-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: transparent;
-    color: var(--hdr-ink-soft);
-    border: 1px solid var(--hdr-line);
-    cursor: pointer;
-    transition:
-      background-color 0.2s var(--hdr-ease),
-      color 0.2s var(--hdr-ease),
-      border-color 0.2s var(--hdr-ease);
-  }
-
-  .nav-close-btn:hover {
-    background-color: var(--hdr-primary-soft);
-    color: var(--hdr-primary);
-    border-color: var(--hdr-primary-soft);
-  }
-
-  .nav-close-btn:active {
-    transform: scale(0.94);
   }
 
   /* ---------- Nav items ---------- */
@@ -744,10 +731,7 @@
   }
 
   .nav-link:hover,
-  .nav-link-btn:hover {
-    background-color: var(--hdr-primary-soft);
-  }
-
+  .nav-link-btn:hover,
   .nav-link:active,
   .nav-link-btn:active {
     background-color: var(--hdr-primary-soft);
@@ -770,7 +754,7 @@
     flex-shrink: 0;
   }
 
-  /* ---------- Accordion dropdown (grid-animated) ---------- */
+  /* ---------- Accordion dropdown ---------- */
   .dropdown {
     position: static;
     opacity: 1;
@@ -860,7 +844,7 @@
     height: 16px;
   }
 
-  .nav-links {
+  .primary-nav {
     width: min(92vw, 360px);
   }
 
@@ -896,12 +880,12 @@
     gap: 0.55rem;
   }
 
-  .nav-links {
+  .primary-nav {
     width: 100vw;
     border-left: none;
   }
 
-  .nav-links-mobile-head {
+  .primary-nav-head {
     padding: 0.8rem 1rem;
   }
 
@@ -919,8 +903,7 @@
 .dropdown-item:focus-visible,
 .nav-btn:focus-visible,
 .menu-toggle:focus-visible,
-.logo-wrapper:focus-visible,
-.nav-close-btn:focus-visible {
+.logo-wrapper:focus-visible {
   outline: 2px solid var(--hdr-primary);
   outline-offset: 3px;
   border-radius: 8px;
@@ -929,7 +912,7 @@
 @media (prefers-reduced-motion: reduce) {
   .navbar,
   .navbar *,
-  .nav-links,
+  .primary-nav,
   .dropdown,
   .nav-caret,
   .logo-mark,
@@ -954,7 +937,7 @@
     border-bottom: 1px solid var(--hdr-line);
   }
 
-  .nav-links,
+  .primary-nav,
   .menu-toggle,
   .nav-btn,
   .nav-backdrop {

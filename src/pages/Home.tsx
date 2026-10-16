@@ -1,8 +1,36 @@
 // pages/Home.tsx
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrophy,
+  faUsers,
+  faGlobe,
+  faCalendarCheck,
+  faCertificate,
+  faCog,
+  faClock,
+  faBullseye,
+  faShieldAlt,
+  faRecycle,
+  faSeedling,
+  faLeaf,
+  faScrewdriverWrench,
+  faClipboardList,
+  faArrowRight,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "./Home.css";
-import logo from "../assets/logo.jpeg";
+
+/* ============================================================
+   ASSETS
+   ============================================================ */
+
+/** Cloudinary-hosted brand logo (auto format + auto quality, 2× retina) */
+const LOGO_URL =
+  "https://res.cloudinary.com/aewdi5ja/image/upload/f_auto,q_auto,w_180/v1792073269/logo_222.png";
 
 /* ============================================================
    TYPES
@@ -14,11 +42,11 @@ type HeroSlide = {
   image: string;
 };
 
-type Stat = { icon: string; value: string; label: string };
+type Stat = { icon: IconDefinition; value: string; label: string };
 type Product = { title: string; description: string; image: string; link: string };
-type Feature = { icon: string; title: string; description: string; tag: string };
+type Feature = { icon: IconDefinition; title: string; description: string; tag: string };
 type Industry = { label: string; description: string; image: string };
-type Sustainability = { icon: string; title: string };
+type Sustainability = { icon: IconDefinition; title: string };
 
 /* ============================================================
    DATA
@@ -49,11 +77,11 @@ const HERO_SLIDES: HeroSlide[] = [
 ];
 
 const STATS: Stat[] = [
-  { icon: "🏆", value: "15+ Years", label: "Industry Expertise" },
-  { icon: "👥", value: "100+ Years", label: "Combined Leadership Experience" },
-  { icon: "🌍", value: "50+ Countries", label: "Global Reach" },
-  { icon: "📅", value: "~15 Days", label: "Typical Lead Time" },
-  { icon: "✅", value: "ISO | BRC | FDA", label: "Certified" },
+  { icon: faTrophy, value: "15+ Years", label: "Industry Expertise" },
+  { icon: faUsers, value: "100+ Years", label: "Combined Leadership Experience" },
+  { icon: faGlobe, value: "50+ Countries", label: "Global Reach" },
+  { icon: faCalendarCheck, value: "~15 Days", label: "Typical Lead Time" },
+  { icon: faCertificate, value: "ISO | BRC | FDA", label: "Certified" },
 ];
 
 const PRODUCTS: Product[] = [
@@ -68,10 +96,10 @@ const PRODUCTS: Product[] = [
 ];
 
 const WHY_CHOOSE: Feature[] = [
-  { icon: "⚙️", title: "Deep Technical Expertise", description: "Decades of hands-on packaging experience delivering high-performance solutions.", tag: "Expertise" },
-  { icon: "⏱️", title: "Reliable Turnaround", description: "Efficient processes ensuring consistent and on-time delivery every time.", tag: "Efficiency" },
-  { icon: "🎯", title: "Customised Solutions", description: "Packaging structures engineered to meet specific product and market needs.", tag: "Tailored" },
-  { icon: "🛡️", title: "Certified & Compliant", description: "Fully aligned with global quality, safety, and regulatory standards.", tag: "Quality" },
+  { icon: faCog, title: "Deep Technical Expertise", description: "Decades of hands-on packaging experience delivering high-performance solutions.", tag: "Expertise" },
+  { icon: faClock, title: "Reliable Turnaround", description: "Efficient processes ensuring consistent and on-time delivery every time.", tag: "Efficiency" },
+  { icon: faBullseye, title: "Customised Solutions", description: "Packaging structures engineered to meet specific product and market needs.", tag: "Tailored" },
+  { icon: faShieldAlt, title: "Certified & Compliant", description: "Fully aligned with global quality, safety, and regulatory standards.", tag: "Quality" },
 ];
 
 const INDUSTRIES: Industry[] = [
@@ -88,9 +116,9 @@ const INDUSTRIES: Industry[] = [
 ];
 
 const SUSTAINABILITY: Sustainability[] = [
-  { icon: "♻️", title: "Recyclable" },
-  { icon: "🌱", title: "Biodegradable" },
-  { icon: "🌿", title: "Compostable" },
+  { icon: faRecycle, title: "Recyclable" },
+  { icon: faSeedling, title: "Biodegradable" },
+  { icon: faLeaf, title: "Compostable" },
 ];
 
 /* ============================================================
@@ -98,28 +126,17 @@ const SUSTAINABILITY: Sustainability[] = [
    ============================================================ */
 
 function ArrowIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  );
+  return <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />;
 }
 
 /* ============================================================
    CAROUSEL HOOK
+   ------------------------------------------------------------
+   Auto-advances every 5 seconds, pauses on hover, supports
+   arrow-key navigation, and exposes prev / next / goTo.
    ============================================================ */
 
-function useCarousel(length: number, interval = 6000) {
+function useCarousel(length: number, interval = 5000) {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -215,9 +232,7 @@ export default function Home() {
                 onClick={prev}
                 aria-label="Previous slide"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
+                <FontAwesomeIcon icon={faChevronLeft} aria-hidden="true" />
               </button>
 
               <div className="hero-dots" role="tablist" aria-label="Hero slides">
@@ -230,9 +245,7 @@ export default function Home() {
                 onClick={next}
                 aria-label="Next slide"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
+                <FontAwesomeIcon icon={faChevronRight} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -249,7 +262,11 @@ export default function Home() {
                   aria-label={`${i + 1} of ${HERO_SLIDES.length}`}
                   aria-hidden={i !== index}
                 >
-                  <img src={slide.image} alt="" loading={i === 0 ? "eager" : "lazy"} />
+                  <img
+                    src={slide.image}
+                    alt=""
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
                 </div>
               ))}
             </div>
@@ -257,7 +274,12 @@ export default function Home() {
             <div className="hero-gallery-accent" aria-hidden="true" />
 
             <div className="hero-logo-badge">
-              <img src={logo} alt="Aditya Agro Print logo" />
+              <img
+                src={LOGO_URL}
+                alt="Aditya Agro Print logo"
+                loading="eager"
+                decoding="async"
+              />
             </div>
 
             <div className="hero-gallery-counter" aria-hidden="true">
@@ -279,7 +301,9 @@ export default function Home() {
           <div className="stats-bar-grid">
             {STATS.map((item) => (
               <div key={item.label} className="stats-bar-item">
-                <div className="icon" aria-hidden="true">{item.icon}</div>
+                <div className="icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={item.icon} />
+                </div>
                 <div className="value">{item.value}</div>
                 <div className="label">{item.label}</div>
               </div>
@@ -316,15 +340,21 @@ export default function Home() {
 
               <div className="about-features">
                 <div className="about-feature">
-                  <span className="icon" aria-hidden="true">⚙️</span>
+                  <span className="icon" aria-hidden="true">
+                    <FontAwesomeIcon icon={faScrewdriverWrench} />
+                  </span>
                   <span>Technical Expertise</span>
                 </div>
                 <div className="about-feature">
-                  <span className="icon" aria-hidden="true">🌐</span>
+                  <span className="icon" aria-hidden="true">
+                    <FontAwesomeIcon icon={faGlobe} />
+                  </span>
                   <span>Global Execution</span>
                 </div>
                 <div className="about-feature">
-                  <span className="icon" aria-hidden="true">📋</span>
+                  <span className="icon" aria-hidden="true">
+                    <FontAwesomeIcon icon={faClipboardList} />
+                  </span>
                   <span>Application-Focused Solutions</span>
                 </div>
               </div>
@@ -354,7 +384,12 @@ export default function Home() {
             {PRODUCTS.map((p) => (
               <Link key={p.title} to={p.link} className="product-card">
                 <div className="product-img-wrap">
-                  <img src={p.image} alt={p.title} className="product-img" loading="lazy" />
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="product-img"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="product-footer">
                   <h3>{p.title}</h3>
@@ -377,13 +412,15 @@ export default function Home() {
       <section className="why-section">
         <div className="container">
           <div className="why-header">
-            <h2>Why Partner With Us</h2>
+            <h2>The Value We Bring</h2>
           </div>
           <div className="why-grid">
             {WHY_CHOOSE.map((item) => (
               <div key={item.title} className="why-card">
                 <div className="why-icon-wrap">
-                  <span className="icon" aria-hidden="true">{item.icon}</span>
+                  <span className="icon" aria-hidden="true">
+                    <FontAwesomeIcon icon={item.icon} />
+                  </span>
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
@@ -445,7 +482,7 @@ export default function Home() {
 
           <div className="industries-grid">
             {INDUSTRIES.map((item) => (
-              <Link to="/industries" key={item.label} className="industry-card">
+              <div key={item.label} className="industry-card">
                 <div className="industry-img-wrap">
                   <img src={item.image} alt={item.label} loading="lazy" />
                 </div>
@@ -453,7 +490,7 @@ export default function Home() {
                   <h3 className="industry-label">{item.label}</h3>
                   <p className="industry-description">{item.description}</p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -473,7 +510,9 @@ export default function Home() {
           <div className="sustainability-grid">
             {SUSTAINABILITY.map((item) => (
               <div key={item.title} className="sustainability-card">
-                <div className="icon" aria-hidden="true">{item.icon}</div>
+                <div className="icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={item.icon} />
+                </div>
                 <h3>{item.title}</h3>
               </div>
             ))}

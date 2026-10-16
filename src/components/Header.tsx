@@ -2,7 +2,18 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
-import logo from "../assets/logo.jpeg";
+
+/* ============================================================
+   ASSETS
+   ============================================================ */
+
+/** Cloudinary-hosted brand logo (auto format + auto quality, 2× retina) */
+const LOGO_URL =
+  "https://res.cloudinary.com/aewdi5ja/image/upload/f_auto,q_auto,w_180/v1792073269/logo_222.png";
+
+/* ============================================================
+   TYPES
+   ============================================================ */
 
 interface NavChild {
   label: string;
@@ -14,6 +25,10 @@ interface NavItem {
   to: string;
   children?: NavChild[];
 }
+
+/* ============================================================
+   NAV DATA
+   ============================================================ */
 
 const navItems: NavItem[] = [
   { label: "Home", to: "/" },
@@ -33,32 +48,21 @@ const navItems: NavItem[] = [
       { label: "Extrusion", to: "/capabilities/extrusion" },
       { label: "Printing", to: "/capabilities/printing" },
       { label: "Lamination", to: "/capabilities/lamination" },
-      {
-        label: "Slitting & Finishing",
-        to: "/capabilities/slitting-finishing",
-      },
-      {
-        label: "Pouch Manufacturing",
-        to: "/capabilities/pouch-manufacturing",
-      },
-      {
-        label: "In-House Gravure Cylinder",
-        to: "/capabilities/in-house-gravure",
-      },
-      {
-        label: "Quality Assurance",
-        to: "/capabilities/quality-assurance",
-      },
-      {
-        label: "Shipping & Logistics",
-        to: "/capabilities/shipping-logistics",
-      },
+      { label: "Slitting & Finishing", to: "/capabilities/slitting-finishing" },
+      { label: "Pouch Manufacturing", to: "/capabilities/pouch-manufacturing" },
+      { label: "In-House Gravure Cylinder", to: "/capabilities/in-house-gravure" },
+      { label: "Quality Assurance", to: "/capabilities/quality-assurance" },
+      { label: "Shipping & Logistics", to: "/capabilities/shipping-logistics" },
     ],
   },
   { label: "Services", to: "/services" },
   { label: "Sustainability", to: "/sustainability" },
   { label: "About Us", to: "/about" },
 ];
+
+/* ============================================================
+   COMPONENT
+   ============================================================ */
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -132,22 +136,34 @@ export default function Header() {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="container nav-wrapper">
-        {/* Logo + Company Name */}
+        {/* ---------- Brand ---------- */}
         <Link
           to="/"
           className="logo-wrapper"
           onClick={() => setMenuOpen(false)}
           aria-label="Aditya Agro Print — Home"
         >
-          <img className="logo-img" src={logo} alt="Aditya Agro Print Logo" />
+          <span className="logo-mark">
+            <img
+              className="logo-img"
+              src={LOGO_URL}
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          </span>
+
+          <span className="logo-divider" aria-hidden="true" />
 
           <span className="logo-text">
-            <span className="logo-text-main">Aditya Agro Print Ind Ltd</span>
-            <span className="logo-text-tag">Connecting Dots, Driving Excellence</span>
+            <span className="logo-text-main">Aditya Agro Print Ind</span>
+            <span className="logo-text-tag">
+              Built for Business · Designed for Growth
+            </span>
           </span>
         </Link>
 
-        {/* Nav Links */}
+        {/* ---------- Nav Links ---------- */}
         <div
           id="primary-navigation"
           className={`nav-links ${menuOpen ? "active" : ""}`}
@@ -171,7 +187,15 @@ export default function Header() {
                     >
                       <span>{item.label}</span>
                       <span className="nav-caret" aria-hidden="true">
-                        +
+                        <svg viewBox="0 0 10 6" fill="none">
+                          <path
+                            d="M1 1l4 4 4-4"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
                       </span>
                     </button>
 
@@ -211,26 +235,41 @@ export default function Header() {
             );
           })}
 
-          {/* Mobile-only CTA (inside slide-out menu) */}
+          {/* Mobile-only CTA */}
           <Link
             to="/contact"
             className="nav-btn nav-btn-mobile"
             onClick={() => setMenuOpen(false)}
           >
-            Get In Touch
+            <span>Get In Touch</span>
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+              width="14"
+              height="14"
+            >
+              <path
+                d="M4 10h12M11 5l5 5-5 5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
         </div>
 
-        {/* Desktop CTA */}
+        {/* ---------- Desktop CTA ---------- */}
         <Link
           to="/contact"
           className="nav-btn nav-btn-desktop"
           onClick={() => setMenuOpen(false)}
         >
-          Get In Touch
+          <span>Get In Touch</span>
         </Link>
 
-        {/* Mobile menu toggle */}
+        {/* ---------- Mobile menu toggle ---------- */}
         <button
           className="menu-toggle"
           aria-label={menuOpen ? "Close menu" : "Open menu"}

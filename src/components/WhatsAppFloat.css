@@ -1,35 +1,141 @@
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ------------------------------------------------------------
+   Fixed-position CTA in the bottom-right corner. Uses the
+   Font Awesome WhatsApp brand icon; hover lifts + scales,
+   and a continuous pulse ring draws attention.
+   ============================================================ */
+
 .whatsapp-float {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 1000;
-  background-color: #25d366;
-  color: white;
-  border-radius: 50%;
+
+  /* Circular container */
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
+
+  /* Brand colors */
+  background-color: #25d366;
+  color: #ffffff;
+
+  /* Shape + polish */
+  border-radius: 50%;
   text-decoration: none;
-  animation: pulse 2s infinite;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+
+  /* Motion */
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  animation: whatsappPulse 2s infinite;
+
+  /* Icon sizing — icon scales with this value */
+  font-size: 1.9rem;
+  line-height: 1;
 }
 
+/* Font Awesome icon inherits currentColor + font-size */
+.whatsapp-float svg.svg-inline--fa {
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+  color: inherit;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+/* ---------- Hover state ---------- */
 .whatsapp-float:hover {
+  background-color: #1ebe5b;
   transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
 }
 
-@keyframes pulse {
+.whatsapp-float:hover svg.svg-inline--fa {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+/* ---------- Active (tap) state ---------- */
+.whatsapp-float:active {
+  transform: scale(1.02);
+}
+
+/* ---------- Focus ring (keyboard nav) ---------- */
+.whatsapp-float:focus-visible {
+  outline: 3px solid #25d366;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* ---------- Pulsing ring ---------- */
+@keyframes whatsappPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4),
+      0 0 0 0 rgba(37, 211, 102, 0.5);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4),
+      0 0 0 15px rgba(37, 211, 102, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4),
+      0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet & below — slightly smaller */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 22px;
+    right: 22px;
+    width: 54px;
+    height: 54px;
+    font-size: 1.7rem;
+  }
+}
+
+/* Small phones — compact + tighter to corner */
+@media (max-width: 480px) {
+  .whatsapp-float {
+    bottom: 18px;
+    right: 18px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.55rem;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — disable pulse + hover transform
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    animation: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .whatsapp-float:hover {
+    transform: none;
+  }
+
+  .whatsapp-float:hover svg.svg-inline--fa {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   PRINT — hide the floating button on printed pages
+   ============================================================ */
+@media print {
+  .whatsapp-float {
+    display: none !important;
   }
 }

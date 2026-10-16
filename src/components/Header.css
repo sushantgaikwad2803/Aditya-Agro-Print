@@ -1,29 +1,34 @@
 /* ============================================================
    HEADER — Aditya Agro Print
-   Uses global brand tokens defined in Home.css / theme
+   ------------------------------------------------------------
+   Sticky nav with brand-tinted hovers, animated underlines,
+   hover/click dropdowns, and a slide-in mobile menu.
    ============================================================ */
 
-/* ---------- Local fallbacks (safe if global CSS loads later) ---------- */
+/* ---------- Local fallbacks (safe if global theme loads later) ---------- */
 :root {
   --hdr-primary: var(--primary, #a90091);
   --hdr-primary-dark: var(--primary-dark, #7d006c);
   --hdr-primary-light: var(--primary-light, #bb3faa);
   --hdr-primary-soft: var(--primary-soft, #fff5fe);
   --hdr-primary-glow: var(--primary-glow, rgba(169, 0, 145, 0.18));
+  --hdr-primary-glow-strong: var(--primary-glow-strong, rgba(169, 0, 145, 0.32));
 
   --hdr-ink: var(--ink, #1a1a2e);
-  --hdr-ink-soft: var(--ink-soft, #555);
+  --hdr-ink-soft: var(--ink-soft, #4b5563);
   --hdr-ink-muted: var(--ink-muted, #6b7280);
   --hdr-line: var(--line, #ececf1);
   --hdr-line-soft: #f4f4f7;
   --hdr-bg: #ffffff;
 
-  --hdr-shadow-sm: 0 2px 15px rgba(0, 0, 0, 0.06);
-  --hdr-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
-  --hdr-shadow-lg: 0 12px 30px -8px rgba(169, 0, 145, 0.18);
+  --hdr-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04),
+    0 1px 2px rgba(15, 23, 42, 0.03);
+  --hdr-shadow-md: 0 6px 24px -6px rgba(15, 23, 42, 0.12),
+    0 2px 6px -2px rgba(15, 23, 42, 0.06);
 
   --hdr-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --hdr-header-h: 96px;
+  --hdr-logo-size: 68px;
 }
 
 /* ============================================================
@@ -37,38 +42,50 @@
   z-index: 1000;
   background-color: var(--hdr-bg);
   box-shadow: var(--hdr-shadow-sm);
-  transition: box-shadow 0.3s var(--hdr-ease),
-    background-color 0.3s var(--hdr-ease);
+  transition: box-shadow 0.35s var(--hdr-ease),
+    background-color 0.35s var(--hdr-ease);
 }
 
 .navbar.scrolled {
   box-shadow: var(--hdr-shadow-md);
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
 }
 
+/* ------------------------------------------------------------
+   Nav wrapper layout:
+     [ LOGO BLOCK ] ← auto spacer → [ NAV LINKS ] [ CTA ]
+   `justify-content: space-between` pushes the logo to the
+   left and the nav+CTA cluster to the right.
+   ------------------------------------------------------------ */
 .nav-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: clamp(1.5rem, 3vw, 3rem);
   min-height: var(--hdr-header-h);
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 /* ============================================================
-   LOGO + COMPANY NAME
+   LOGO BLOCK
+   ------------------------------------------------------------
+   Structure:
+     .logo-wrapper
+       ├── .logo-mark      → square brand icon
+       ├── .logo-divider   → 1px vertical line
+       └── .logo-text      → 2-line wordmark
    ============================================================ */
 .logo-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
-  text-decoration: none;
+  gap: 0.9rem;
   flex-shrink: 0;
+  text-decoration: none;
   border-radius: 10px;
-  padding: 0.25rem;
+  padding: 0.35rem 0.5rem 0.35rem 0;
   transition: transform 0.3s var(--hdr-ease);
   min-width: 0;
 }
@@ -77,37 +94,56 @@
   transform: translateY(-1px);
 }
 
-.logo-img {
-  height: 80px;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  border-radius: 8px;
+/* ---------- Square brand mark ---------- */
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--hdr-logo-size);
+  height: var(--hdr-logo-size);
   flex-shrink: 0;
-  transition: transform 0.35s var(--hdr-ease), filter 0.3s ease;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.04));
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.4s var(--hdr-ease);
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(169, 0, 145, 0.08));
+}
+
+.logo-wrapper:hover .logo-mark {
+  transform: scale(1.04);
 }
 
 .logo-wrapper:hover .logo-img {
-  transform: scale(1.04);
-  filter: drop-shadow(0 4px 12px rgba(169, 0, 145, 0.18));
+  filter: drop-shadow(0 6px 16px rgba(169, 0, 145, 0.22));
 }
 
-/* ---------- Company name text ---------- */
+/* ---------- Vertical divider (scales with logo) ---------- */
+
+
+/* ---------- Two-line wordmark ---------- */
 .logo-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0.3rem;
   min-width: 0;
   line-height: 1.1;
+  position: relative;
+   left: -1rem;
 }
 
 .logo-text-main {
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: 1.60rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.022em;
   color: var(--hdr-ink);
   line-height: 1.1;
   white-space: nowrap;
@@ -120,30 +156,18 @@
 
 .logo-text-tag {
   font-family: inherit;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--hdr-ink-muted);
   white-space: nowrap;
-  line-height: 1.2;
+  line-height: 1.25;
+  transition: color 0.25s var(--hdr-ease);
 }
 
-/* Vertical divider between logo and text */
-.logo-text::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 32px;
-  background-color: var(--hdr-line);
-}
-
-.logo-text {
-  position: relative;
-  padding-left: 1rem;
+.logo-wrapper:hover .logo-text-tag {
+  color: var(--hdr-primary-light);
 }
 
 /* ============================================================
@@ -152,8 +176,8 @@
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.2rem;
+  justify-content: flex-end;
+  gap: 0.1rem;
   flex: 1;
   min-width: 0;
 }
@@ -166,8 +190,8 @@
 .nav-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.65rem 0.95rem;
+  gap: 0.3rem;
+  padding: 0.7rem 0.7rem;
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
@@ -185,19 +209,23 @@
     background-color 0.2s var(--hdr-ease);
 }
 
-/* Animated underline */
+/* Animated gradient underline */
 .nav-link::after,
 .nav-link-btn::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 0.35rem;
+  bottom: 0.4rem;
   width: 0;
   height: 2px;
-  background: var(--hdr-primary);
+  background: linear-gradient(
+    90deg,
+    var(--hdr-primary) 0%,
+    var(--hdr-primary-light) 100%
+  );
   border-radius: 2px;
   transform: translateX(-50%);
-  transition: width 0.3s var(--hdr-ease);
+  transition: width 0.32s var(--hdr-ease);
 }
 
 .nav-link:hover,
@@ -210,7 +238,7 @@
 .nav-link-btn:hover::after,
 .nav-link.active::after,
 .nav-link-btn.active::after {
-  width: calc(100% - 1.9rem);
+  width: calc(100% - 1.8rem);
 }
 
 .nav-link.active,
@@ -219,17 +247,31 @@
   font-weight: 600;
 }
 
+/* ---------- Caret ---------- */
 .nav-caret {
-  display: inline-block;
-  font-size: 0.95em;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.62rem;
+  height: 0.62rem;
   color: var(--hdr-primary);
   line-height: 1;
   transition: transform 0.3s var(--hdr-ease);
 }
 
+.nav-caret svg {
+  width: 100%;
+  height: 100%;
+}
+
 .nav-link-btn[aria-expanded="true"] .nav-caret {
-  transform: rotate(45deg);
+  transform: rotate(180deg);
+}
+
+@media (min-width: 901px) and (hover: hover) {
+  .nav-item:hover > .nav-link-btn .nav-caret {
+    transform: rotate(180deg);
+  }
 }
 
 /* ============================================================
@@ -239,17 +281,18 @@
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  min-width: 250px;
+  min-width: 260px;
   max-width: 340px;
   background-color: var(--hdr-bg);
   border: 1px solid var(--hdr-line);
   border-radius: 14px;
-  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.18),
-    0 4px 12px -4px rgba(15, 23, 42, 0.06);
-  padding: 0.5rem;
+  box-shadow:
+    0 24px 48px -18px rgba(15, 23, 42, 0.2),
+    0 8px 16px -8px rgba(15, 23, 42, 0.08);
+  padding: 0.55rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
@@ -261,11 +304,12 @@
   pointer-events: none;
 }
 
+/* Arrow indicator (centered under the label area) */
 .dropdown::before {
   content: "";
   position: absolute;
   top: -6px;
-  left: 24px;
+  left: 22px;
   width: 12px;
   height: 12px;
   background-color: var(--hdr-bg);
@@ -285,22 +329,22 @@
 .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.65rem 0.85rem;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
   font-size: 0.86rem;
   font-weight: 500;
   color: var(--hdr-ink-soft);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 9px;
   line-height: 1.35;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
   transition:
-    background-color 0.15s var(--hdr-ease),
-    color 0.15s var(--hdr-ease),
-    padding-left 0.2s var(--hdr-ease);
+    background-color 0.18s var(--hdr-ease),
+    color 0.18s var(--hdr-ease),
+    padding-left 0.22s var(--hdr-ease);
 }
 
 .dropdown-item::before {
@@ -310,18 +354,20 @@
   height: 5px;
   border-radius: 50%;
   background-color: var(--hdr-line);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.22s ease,
+    transform 0.22s ease;
 }
 
 .dropdown-item:hover {
   background-color: var(--hdr-primary-soft);
   color: var(--hdr-primary);
-  padding-left: 1rem;
+  padding-left: 1.05rem;
 }
 
 .dropdown-item:hover::before {
   background-color: var(--hdr-primary);
-  transform: scale(1.3);
+  transform: scale(1.35);
 }
 
 .dropdown-item.active {
@@ -334,17 +380,12 @@
   background-color: var(--hdr-primary-dark);
 }
 
-/* Hover-open on desktop (in addition to click) */
 @media (min-width: 901px) and (hover: hover) {
   .nav-item:hover > .dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-  }
-
-  .nav-item:hover > .nav-link-btn .nav-caret {
-    transform: rotate(45deg);
   }
 }
 
@@ -355,13 +396,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  background-color: var(--hdr-primary);
+  gap: 0.45rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--hdr-primary) 0%,
+    var(--hdr-primary-light) 100%
+  );
   color: #ffffff;
   font-family: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  padding: 0.75rem 1.6rem;
+  padding: 0.8rem 1.6rem;
   border-radius: 9999px;
   border: none;
   cursor: pointer;
@@ -369,21 +416,41 @@
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
+  letter-spacing: 0.01em;
   transition:
-    background-color 0.25s var(--hdr-ease),
-    transform 0.2s var(--hdr-ease),
-    box-shadow 0.25s var(--hdr-ease);
-  box-shadow: 0 6px 15px var(--hdr-primary-glow);
+    transform 0.22s var(--hdr-ease),
+    box-shadow 0.25s var(--hdr-ease),
+    filter 0.25s var(--hdr-ease);
+  box-shadow: 0 6px 18px -4px var(--hdr-primary-glow-strong);
+}
+
+/* Subtle top highlight (adds dimension) */
+.nav-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 45%
+  );
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 .nav-btn:hover {
-  background-color: var(--hdr-primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px var(--hdr-primary-glow);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 28px -6px var(--hdr-primary-glow-strong);
 }
 
 .nav-btn:active {
   transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.nav-btn svg {
+  flex-shrink: 0;
 }
 
 .nav-btn-mobile {
@@ -402,12 +469,18 @@
   color: var(--hdr-ink);
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 8px;
-  transition: background-color 0.2s var(--hdr-ease);
+  border-radius: 10px;
+  transition:
+    background-color 0.2s var(--hdr-ease),
+    transform 0.2s var(--hdr-ease);
 }
 
 .menu-toggle:hover {
   background-color: var(--hdr-line-soft);
+}
+
+.menu-toggle:active {
+  transform: scale(0.94);
 }
 
 .menu-icon {
@@ -425,8 +498,9 @@
   height: 2px;
   background-color: currentColor;
   border-radius: 2px;
-  transition: transform 0.3s var(--hdr-ease),
-    opacity 0.2s var(--hdr-ease), top 0.3s var(--hdr-ease);
+  transition:
+    transform 0.35s var(--hdr-ease),
+    opacity 0.2s var(--hdr-ease);
   transform-origin: center;
 }
 
@@ -444,37 +518,70 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Tablet & Mobile (≤1100px)
+   RESPONSIVE — Tablet (≤1200px)
    ============================================================ */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   :root {
-    --hdr-header-h: 88px;
-  }
-
-  .logo-img {
-    height: 58px;
+    --hdr-header-h: 92px;
+    --hdr-logo-size: 62px;
   }
 
   .logo-text-main {
-    font-size: 1.08rem;
+    font-size: 1.12rem;
   }
 
   .logo-text-tag {
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
+    font-size: 0.54rem;
+    letter-spacing: 0.14em;
   }
 
   .nav-link,
   .nav-link-btn {
-    padding: 0.6rem 0.75rem;
-    font-size: 0.85rem;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.86rem;
+  }
+
+  .nav-btn {
+    padding: 0.75rem 1.4rem;
+    font-size: 0.82rem;
   }
 }
 
-/* ---------- Mobile / Tablet landscape (≤900px) ---------- */
+/* ============================================================
+   RESPONSIVE — Small desktop (≤1100px)
+   ============================================================ */
+@media (max-width: 1100px) {
+  :root {
+    --hdr-header-h: 88px;
+    --hdr-logo-size: 58px;
+  }
+
+  .logo-text-main {
+    font-size: 1.05rem;
+  }
+
+  .logo-text-tag {
+    font-size: 0.52rem;
+  }
+
+  .nav-link,
+  .nav-link-btn {
+    padding: 0.62rem 0.65rem;
+    font-size: 0.83rem;
+  }
+
+  .nav-btn {
+    padding: 0.72rem 1.25rem;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile / Tablet landscape (≤900px)
+   ============================================================ */
 @media (max-width: 900px) {
   :root {
     --hdr-header-h: 84px;
+    --hdr-logo-size: 56px;
   }
 
   .menu-toggle {
@@ -489,24 +596,20 @@
     display: inline-flex;
     width: 100%;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
     padding: 1rem 1.5rem;
     font-size: 0.95rem;
   }
 
-  .logo-img {
-    height: 56px;
-  }
-
   .logo-text-main {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
   }
 
   .logo-text-tag {
-    font-size: 0.56rem;
+    font-size: 0.5rem;
   }
 
-  /* Slide-out menu */
+  /* ---------- Slide-out menu ---------- */
   .nav-links {
     position: fixed;
     top: var(--hdr-header-h);
@@ -523,9 +626,10 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     transform: translateX(100%);
-    transition: transform 0.35s var(--hdr-ease);
+    transition: transform 0.38s var(--hdr-ease);
     z-index: 999;
     border-top: 1px solid var(--hdr-line);
+    box-shadow: -20px 0 40px -20px rgba(0, 0, 0, 0.15);
   }
 
   .nav-links.active {
@@ -557,6 +661,11 @@
     display: none;
   }
 
+  .nav-link:hover,
+  .nav-link-btn:hover {
+    background-color: transparent;
+  }
+
   .nav-link-btn {
     text-align: left;
   }
@@ -568,7 +677,8 @@
   }
 
   .nav-caret {
-    font-size: 1.1rem;
+    width: 0.85rem;
+    height: 0.85rem;
   }
 
   .dropdown {
@@ -583,8 +693,8 @@
     max-height: 0;
     overflow: hidden;
     transition:
-      max-height 0.35s var(--hdr-ease),
-      padding 0.35s var(--hdr-ease);
+      max-height 0.4s var(--hdr-ease),
+      padding 0.4s var(--hdr-ease);
     border-radius: 0;
     min-width: 0;
     max-width: none;
@@ -601,12 +711,12 @@
   }
 
   .dropdown-item {
-    padding: 0.8rem 1rem;
+    padding: 0.85rem 1rem;
     font-size: 0.92rem;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    border-radius: 6px;
+    border-radius: 8px;
   }
 
   .dropdown-item.active {
@@ -615,42 +725,33 @@
   }
 }
 
-/* ---------- Small mobile (≤600px) ---------- */
+/* ============================================================
+   RESPONSIVE — Small mobile (≤600px)
+   ============================================================ */
 @media (max-width: 600px) {
   :root {
     --hdr-header-h: 78px;
+    --hdr-logo-size: 50px;
   }
 
   .nav-wrapper {
     gap: 0.75rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .logo-wrapper {
-    gap: 0.6rem;
-  }
-
-  .logo-img {
-    height: 48px;
-  }
-
-  .logo-text {
-    padding-left: 0.7rem;
-  }
-
-  .logo-text::before {
-    height: 26px;
+    gap: 0.65rem;
+    padding-right: 0.25rem;
   }
 
   .logo-text-main {
-    font-size: 0.95rem;
-    letter-spacing: -0.01em;
+    font-size: 0.96rem;
   }
 
   .logo-text-tag {
-    font-size: 0.52rem;
-    letter-spacing: 0.1em;
+    font-size: 0.48rem;
+    letter-spacing: 0.12em;
   }
 
   .menu-toggle {
@@ -673,18 +774,24 @@
   }
 }
 
-/* ---------- Very small mobile (≤400px) ---------- */
-@media (max-width: 400px) {
+/* ============================================================
+   RESPONSIVE — Very small mobile (≤430px)
+   ============================================================ */
+@media (max-width: 430px) {
+  :root {
+    --hdr-logo-size: 46px;
+  }
+
+  .logo-divider {
+    display: none;
+  }
+
   .logo-text-tag {
     display: none;
   }
 
   .logo-text-main {
     font-size: 0.92rem;
-  }
-
-  .logo-img {
-    height: 44px;
   }
 }
 
@@ -708,6 +815,7 @@
   .nav-links,
   .dropdown,
   .nav-caret,
+  .logo-mark,
   .logo-img,
   .logo-wrapper,
   .nav-btn,

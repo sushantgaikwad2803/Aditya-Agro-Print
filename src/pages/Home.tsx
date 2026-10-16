@@ -114,7 +114,7 @@ const INDUSTRIES: Industry[] = [
   { label: "Pet Food & Pet Care", description: "Freshness-sealed, odour-lock packaging for pet products", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&auto=format" },
   { label: "Medical & Pharma", description: "Sterile, tamper-evident & compliant medical packaging", image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&auto=format" },
 ];
-
+ 
 const SUSTAINABILITY: Sustainability[] = [
   { icon: faRecycle, title: "Recyclable" },
   { icon: faSeedling, title: "Biodegradable" },

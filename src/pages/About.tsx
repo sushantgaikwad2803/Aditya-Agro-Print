@@ -182,7 +182,7 @@ const About = () => {
             </h1>
 
             <p className="about-hero-description">
-              Aditya Agro Print is a Mumbai-based flexible packaging partner serving
+              Aditya Agro Print is a flexible packaging partner serving
               industries across food, retail, industrial, and hospitality
               sectors. We combine material expertise, global sourcing, and
               process control to deliver packaging that performs at scale.

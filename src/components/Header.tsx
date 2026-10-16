@@ -3,17 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
 
-/* ============================================================
-   ASSETS
-   ============================================================ */
-
-/** Cloudinary-hosted brand logo (auto format + auto quality, 2× retina) */
 const LOGO_URL =
   "https://res.cloudinary.com/aewdi5ja/image/upload/f_auto,q_auto,w_180/v1792073269/logo_222.png";
-
-/* ============================================================
-   TYPES
-   ============================================================ */
 
 interface NavChild {
   label: string;
@@ -25,10 +16,6 @@ interface NavItem {
   to: string;
   children?: NavChild[];
 }
-
-/* ============================================================
-   NAV DATA
-   ============================================================ */
 
 const navItems: NavItem[] = [
   { label: "Home", to: "/" },
@@ -60,23 +47,19 @@ const navItems: NavItem[] = [
   { label: "About Us", to: "/about" },
 ];
 
-/* ============================================================
-   COMPONENT
-   ============================================================ */
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  /* ---------- Close everything on route change ---------- */
+  /* Close everything on route change */
   useEffect(() => {
     setMenuOpen(false);
     setOpenDropdown(null);
   }, [location.pathname]);
 
-  /* ---------- Close dropdowns on outside click ---------- */
+  /* Close dropdowns on outside click */
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -86,7 +69,7 @@ export default function Header() {
     return () => document.removeEventListener("click", onDocClick);
   }, []);
 
-  /* ---------- Close mobile menu + dropdowns on resize ---------- */
+  /* Close mobile menu + dropdowns on resize (desktop breakpoint) */
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 900) {
@@ -98,7 +81,7 @@ export default function Header() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  /* ---------- Escape key closes menu & dropdowns ---------- */
+  /* Escape key closes menu & dropdowns */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -110,7 +93,7 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  /* ---------- Lock body scroll when mobile menu is open ---------- */
+  /* Lock body scroll when mobile menu is open */
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -119,9 +102,9 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  /* ---------- Navbar shadow on scroll ---------- */
+  /* Navbar shadow on scroll */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -133,14 +116,20 @@ export default function Header() {
     setOpenDropdown((prev) => (prev === label ? null : label));
   };
 
+  /* Backdrop click closes mobile menu */
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setOpenDropdown(null);
+  };
+
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="container nav-wrapper">
-        {/* ---------- Brand ---------- */}
+        {/* Brand */}
         <Link
           to="/"
           className="logo-wrapper"
-          onClick={() => setMenuOpen(false)}
+          onClick={closeMobileMenu}
           aria-label="Aditya Agro Print — Home"
         >
           <span className="logo-mark">
@@ -150,10 +139,10 @@ export default function Header() {
               alt=""
               loading="eager"
               decoding="async"
+              width={68}
+              height={68}
             />
           </span>
-
-          <span className="logo-divider" aria-hidden="true" />
 
           <span className="logo-text">
             <span className="logo-text-main">Aditya Agro Print Ind</span>
@@ -163,11 +152,38 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* ---------- Nav Links ---------- */}
+        {/* Mobile backdrop */}
+        <div
+          className={`nav-backdrop ${menuOpen ? "active" : ""}`}
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+
+        {/* Nav links */}
         <div
           id="primary-navigation"
           className={`nav-links ${menuOpen ? "active" : ""}`}
         >
+          {/* Mobile menu header (close button row) */}
+          <div className="nav-links-mobile-head" aria-hidden="true">
+            <span>Menu</span>
+            <button
+              type="button"
+              className="nav-close-btn"
+              onClick={closeMobileMenu}
+              aria-label="Close menu"
+            >
+              <svg viewBox="0 0 20 20" fill="none" width="18" height="18">
+                <path
+                  d="M5 5l10 10M15 5L5 15"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
           {navItems.map((item) => {
             const isSectionActive =
               item.to !== "/" && location.pathname.startsWith(item.to);
@@ -178,9 +194,7 @@ export default function Header() {
                   <>
                     <button
                       type="button"
-                      className={`nav-link-btn ${
-                        isSectionActive ? "active" : ""
-                      }`}
+                      className={`nav-link-btn ${isSectionActive ? "active" : ""}`}
                       onClick={(e) => toggleDropdown(item.label, e)}
                       aria-expanded={openDropdown === item.label}
                       aria-haspopup="true"
@@ -200,9 +214,7 @@ export default function Header() {
                     </button>
 
                     <div
-                      className={`dropdown ${
-                        openDropdown === item.label ? "open" : ""
-                      }`}
+                      className={`dropdown ${openDropdown === item.label ? "open" : ""}`}
                       role="menu"
                     >
                       {item.children.map((child) => (
@@ -213,7 +225,7 @@ export default function Header() {
                           className={({ isActive }) =>
                             `dropdown-item ${isActive ? "active" : ""}`
                           }
-                          onClick={() => setOpenDropdown(null)}
+                          onClick={closeMobileMenu}
                         >
                           {child.label}
                         </NavLink>
@@ -227,6 +239,7 @@ export default function Header() {
                     className={({ isActive }) =>
                       `nav-link ${isActive ? "active" : ""}`
                     }
+                    onClick={closeMobileMenu}
                   >
                     {item.label}
                   </NavLink>
@@ -239,7 +252,7 @@ export default function Header() {
           <Link
             to="/contact"
             className="nav-btn nav-btn-mobile"
-            onClick={() => setMenuOpen(false)}
+            onClick={closeMobileMenu}
           >
             <span>Get In Touch</span>
             <svg
@@ -260,17 +273,18 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* ---------- Desktop CTA ---------- */}
+        {/* Desktop CTA */}
         <Link
           to="/contact"
           className="nav-btn nav-btn-desktop"
-          onClick={() => setMenuOpen(false)}
+          onClick={closeMobileMenu}
         >
           <span>Get In Touch</span>
         </Link>
 
-        {/* ---------- Mobile menu toggle ---------- */}
+        {/* Mobile menu toggle */}
         <button
+          type="button"
           className="menu-toggle"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}

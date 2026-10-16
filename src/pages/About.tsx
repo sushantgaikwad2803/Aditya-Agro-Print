@@ -62,7 +62,7 @@ const detailBlocks: DetailBlock[] = [
       "Custom formats across a wide range of flexible packaging",
     ],
     image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=900",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142036/about.png",
     imagePosition: "right",
   },
   {
@@ -78,7 +78,7 @@ const detailBlocks: DetailBlock[] = [
       "Accessing advanced manufacturing capabilities when required",
     ],
     image:
-      "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=900",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142036/about1.png",
     imagePosition: "left",
   },
   {
@@ -97,7 +97,7 @@ const detailBlocks: DetailBlock[] = [
     closingParagraph:
       "Every product is aligned with strict quality expectations before it reaches you.",
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142038/about3.png",
     imagePosition: "right",
   },
   {
@@ -114,7 +114,7 @@ const detailBlocks: DetailBlock[] = [
       "Consistent availability for technical and commercial queries",
     ],
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=900",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142038/about2.png",
     imagePosition: "left",
   },
 ];
@@ -158,7 +158,7 @@ const About = () => {
       <section className="about-hero">
         <div className="about-hero-bg" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=1600"
+            src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792144195/Modern_Industrial_Printing_Press_in_White_Studio.png"
             alt=""
           />
           <div className="about-hero-overlay" />

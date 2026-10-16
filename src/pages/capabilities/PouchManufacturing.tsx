@@ -12,49 +12,49 @@ const pouchStyles: PouchStyle[] = [
     id: 1,
     title: 'Stand Up Pouch',
     image:
-      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139867/original-95185f79701af7148bbe55afc20eb587.webp',
   },
   {
     id: 2,
     title: 'Side Gazette Pouch',
     image:
-      'https://images.unsplash.com/photo-1626202158874-63259679139a?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch2.webp',
   },
   {
     id: 3,
     title: '3 Side Seal',
     image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch3.webp',
   },
   {
     id: 4,
     title: 'Quad Seal',
     image:
-      'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch4.webp',
   },
   {
     id: 5,
     title: 'Spout Pouch',
     image:
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147258/Pouch5.webp',
   },
   {
     id: 6,
     title: '3D Pouch',
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147258/Pouch6.webp',
   },
   {
     id: 7,
     title: 'Profile Pouch',
     image:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139925/Fresh_Beverage_Pouches_with_Fruit_Splash.png',
   },
   {
     id: 8,
     title: 'Reclosable Pouch',
     image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=400&h=300',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147258/Pouch7.webp',
   },
 ];
 
@@ -89,7 +89,7 @@ const PouchManufacturing = () => {
               <span className="pouch-badge">HFFS Machinery</span>
               <div className="pouch-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792147043/pouch1.webp"
                   alt="HFFS Pouch Making Machines"
                   loading="lazy"
                 />

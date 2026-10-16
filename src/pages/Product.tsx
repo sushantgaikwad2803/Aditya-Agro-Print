@@ -158,7 +158,7 @@ const Product = () => {
                     {String(selectedIndex + 1).padStart(2, "0")} /{" "}
                     {String(products.length).padStart(2, "0")}
                   </span>
-                  <button
+                  <button 
                     type="button"
                     className="pkg-detail-close"
                     onClick={handleClose}

@@ -17,7 +17,7 @@ const capabilities: Capability[] = [
     title: "Film Extrusion",
     description: "High-performance mono and multi-layer film production.",
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792146232/Extrusion1.webp",
     to: "/capabilities/extrusion",
   },
   {
@@ -26,7 +26,7 @@ const capabilities: Capability[] = [
     description:
       "Vibrant, high-definition printing with precise color registration.",
     image:
-      "https://images.unsplash.com/photo-1560416313-2d942e7f51a9?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792146565/Printing.webp",
     to: "/capabilities/printing",
   },
   {
@@ -35,7 +35,7 @@ const capabilities: Capability[] = [
     description:
       "Eco-friendly, high-bond strength lamination for durable packaging.",
     image:
-      "https://images.unsplash.com/photo-1622675363311-ac97f3a9a671?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792146746/Lamination.webp",
     to: "/capabilities/lamination",
   },
   {
@@ -52,7 +52,7 @@ const capabilities: Capability[] = [
     title: "Pouch Manufacturing",
     description: "Stand-up, zippered, and custom-shaped pouch solutions.",
     image:
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792147042/pouch.webp",
     to: "/capabilities/pouch-manufacturing",
   },
   {
@@ -61,7 +61,7 @@ const capabilities: Capability[] = [
     description:
       "Proprietary cylinder engraving for unmatched print quality control.",
     image:
-      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792147459/copper-plated-cylinders.webp",
     to: "/capabilities/in-house-gravure",
   },
   {
@@ -70,7 +70,7 @@ const capabilities: Capability[] = [
     description:
       "Rigorous in-line and offline testing to guarantee zero defects.",
     image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792147590/Quality.webp",
     to: "/capabilities/quality-assurance",
   },
   {
@@ -182,7 +182,7 @@ const Capabilities = () => {
               end-to-end packaging services under one roof. Let's build
               something great.
             </p>
-            <Link to="/contact" className="cap-cta-btn">
+            <Link to="/contact" className="cap-cta-btn"> 
               Get in Touch
               <svg
                 xmlns="http://www.w3.org/2000/svg"

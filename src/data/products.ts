@@ -41,9 +41,9 @@ export const products: Product[] = [
     id: 'roll-stock',
     title: 'Roll Stock',
     shortDescription: 'Optimised for high-speed HFFS/VFFS lines',
-    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139853/VitaBloom_Packaging_Film_Collection.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139853/VitaBloom_Packaging_Film_Collection.png',
       description: 'Engineered for high-speed form-fill-seal systems, our single and multi-layer roll stock is designed for seamless integration across HFFS, VFFS, and pouch-making equipment. It delivers consistent performance across varying web widths, repeats, and machine configurations.',
       quickSpecs: ['2–4 ply laminates', 'Single & multi-track', 'Wide web widths', 'Custom repeat lengths'],
       inlineParagraph: 'Compatible with horizontal and vertical FFS, as well as horizontal bag and pouch-making equipment. Available in printed and unprinted laminations, with surface and reverse printing options.',
@@ -61,20 +61,20 @@ export const products: Product[] = [
     id: 'pouches',
     title: 'Pouches',
     shortDescription: 'Consumer-ready laminated packaging formats',
-    thumbnail: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139870/PureNest_Natural_Foods_Collection.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139870/PureNest_Natural_Foods_Collection.png',
       description: 'Laminated pouches designed for high shelf impact, structural performance, and product compatibility across food and non-food applications. Suitable for solids, liquids, powders, and granulates.',
       quickSpecs: ['Multi-layer laminates', 'Barrier layer combinations', 'Closure integration'],
       inlineParagraph: 'Available in foil, paper, polyester, and nylon structures with gloss or matte finishes.',
       formatGrid: [
-        { title: 'Stand Up Pouch', description: 'Stable base with zipper and window options', image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: 'Spout Pouches', description: 'Integrated dispensing with tamper-evident closures', image: 'https://images.unsplash.com/photo-1626202158874-63259679139a?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: 'Profile Pouches', description: 'Custom contours for differentiation and handling', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: '3D Pouches', description: 'Expandable structures for higher volume and premium feel', image: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: 'Side-Gusset Pouches', description: 'Space-efficient storage with expandable sides', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: 'Reclosable Pouch', description: 'Multiple reclosure options for extended usability', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400&h=300' },
-        { title: 'Flat Bottom Pouch', description: 'Box-style structure for stability and stacking', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400&h=300' }
+        { title: 'Stand Up Pouch', description: 'Stable base with zipper and window options', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139867/original-95185f79701af7148bbe55afc20eb587.webp' },
+        { title: 'Spout Pouches', description: 'Integrated dispensing with tamper-evident closures', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch2.webp' },
+        { title: 'Profile Pouches', description: 'Custom contours for differentiation and handling', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139925/Fresh_Beverage_Pouches_with_Fruit_Splash.png' },
+        { title: '3D Pouches', description: 'Expandable structures for higher volume and premium feel', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147258/Pouch6.webp' },
+        { title: 'Side-Gusset Pouches', description: 'Space-efficient storage with expandable sides', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch2.webp' },
+        { title: 'Reclosable Pouch', description: 'Multiple reclosure options for extended usability', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147258/Pouch7.webp' },
+        { title: 'Flat Bottom Pouch', description: 'Box-style structure for stability and stacking', image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147259/Pouch4.webp' }
       ]
     }
   },
@@ -82,9 +82,9 @@ export const products: Product[] = [
     id: 'barrier-films',
     title: 'Barrier Films',
     shortDescription: 'Multi-layer oxygen and moisture barrier systems',
-    thumbnail: 'https://images.unsplash.com/photo-1626202158874-63259679139a?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139935/Barrier_Film_Packaging_Showcase.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1626202158874-63259679139a?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139935/Barrier_Film_Packaging_Showcase.png',
       description: 'Co-extruded multi-layer films engineered to control oxygen and moisture transmission, extending shelf life and maintaining product integrity.',
       quickSpecs: ['Up to 9-layer structures', 'EVOH and Nylon barrier systems'],
       bottomSections: [
@@ -98,9 +98,9 @@ export const products: Product[] = [
     id: 'thermoforming',
     title: 'Thermoforming Films',
     shortDescription: 'Precision forming and lidding solutions',
-    thumbnail: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139883/Premium_DairyEdge_Cheddar_Cheese_Display.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139883/Premium_DairyEdge_Cheddar_Cheese_Display.png',
       description: 'High-barrier forming and lidding films developed for demanding food packaging applications, ensuring durability, seal integrity, and extended shelf life.',
       quickSpecs: ['Up to 9-layer films', 'High puncture resistance', 'Seal performance control'],
       bottomSections: [
@@ -114,9 +114,9 @@ export const products: Product[] = [
     id: 'specialty-films',
     title: 'Specialty Films',
     shortDescription: 'UHT and shrink packaging',
-    thumbnail: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139872/Shrink-Wrapped_Packaging_Product_Display.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139872/Shrink-Wrapped_Packaging_Product_Display.png',
       description: 'Specialised film solutions for high-performance and controlled packaging environments.',
       bottomSections: [
         { title: 'UHT Films', content: 'EVOH-based structures designed for extended shelf life in dairy applications, maintaining product stability for up to 90 days under ambient conditions.' },
@@ -129,9 +129,9 @@ export const products: Product[] = [
     id: 'woven-bopp',
     title: 'Woven (BOPP)',
     shortDescription: 'Heavy-duty industrial',
-    thumbnail: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139927/Colorful_BOPP_Woven_Sack_Display.png',
     detail: {
-      image: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792139927/Colorful_BOPP_Woven_Sack_Display.png',
       description: 'BOPP laminated woven bags engineered for high-load and bulk packaging applications, combining structural strength with high-quality printability.',
       quickSpecs: ['High tensile strength', 'Moisture resistance', 'Full-colour printing'],
       bottomSections: [
@@ -143,9 +143,9 @@ export const products: Product[] = [
     id: 'vacuum-wicket',
     title: 'Vacuum & Wicket',
     shortDescription: 'Freshness and automation-ready',
-    thumbnail: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400&h=300',
+    thumbnail: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792145668/web120-1-05v2_400.webp',
     detail: {
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800',
+      image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792145668/web120-1-05v2_400.webp',
       description: '', // Main description not used for split layout
       splitSections: [
         {
@@ -156,7 +156,7 @@ export const products: Product[] = [
             'Suitable for bakery, fresh produce, frozen foods, personal care, and other applications.',
             'Sustainable options include downgauged materials, recycled content, and bio-based alternatives.'
           ],
-          image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800',
+          image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792145668/web120-1-05v2_400.webp',
           reverse: false
         },
         {
@@ -167,7 +167,7 @@ export const products: Product[] = [
             'Prevents bacterial growth, freezer burn, and spoilage while maintaining freshness and product quality.',
             'Suitable for meat, seafood, dairy, and other sensitive products.'
           ],
-          image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
+          image: 'https://res.cloudinary.com/aewdi5ja/image/upload/v1792145668/51jHtBGR0XL-1024x779.webp',
           reverse: true
         }
       ]

@@ -54,7 +54,7 @@ const ShippingLogistics = () => {
               <span className="shipping-badge">End-to-End</span>
               <div className="shipping-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792147862/11.avif"
                   alt="Warehouse and Shipping Operations"
                   loading="lazy"
                 />

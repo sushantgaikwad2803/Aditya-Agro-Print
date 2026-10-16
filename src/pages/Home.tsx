@@ -1,5 +1,5 @@
 // pages/Home.tsx
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,17 +25,8 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "./Home.css";
 
 /* ============================================================
-   ASSETS
-   ============================================================ */
-
-/** Cloudinary-hosted brand logo (auto format + auto quality, 2× retina) */
-const LOGO_URL =
-  "https://res.cloudinary.com/aewdi5ja/image/upload/f_auto,q_auto,w_180/v1792073269/logo_222.png";
-
-/* ============================================================
    TYPES
    ============================================================ */
-
 type HeroSlide = {
   title: string;
   description: string;
@@ -51,28 +42,27 @@ type Sustainability = { icon: IconDefinition; title: string };
 /* ============================================================
    DATA
    ============================================================ */
-
 const HERO_SLIDES: HeroSlide[] = [
   {
     title: "Flexible Packaging for a Bolder, Greener Tomorrow",
     description:
       "We engineer packaging solutions that reduce waste, enhance shelf appeal, and keep your supply chain moving — backed by three decades of expertise.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&auto=format",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139867/original-95185f79701af7148bbe55afc20eb587.webp",
   },
   {
     title: "Engineered Films. Proven Performance.",
     description:
       "From monolayer to 9-layer co-extruded structures, our films deliver barrier protection, seal integrity, and machine performance at scale.",
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&auto=format",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139868/Industrial_Web-Handling_Machinery_Showcase.png",
   },
   {
     title: "Sustainable Packaging, Delivered.",
     description:
       "Recyclable, biodegradable, and compostable formats designed around your product, your market, and your circularity goals.",
     image:
-      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900&auto=format",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139924/Custom-Eco-Friendly-Packaging-Solutions-1024x683.webp",
   },
 ];
 
@@ -85,14 +75,13 @@ const STATS: Stat[] = [
 ];
 
 const PRODUCTS: Product[] = [
-  { title: "Pouches", description: "Functional, high-impact consumer packaging", image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=400&auto=format", link: "/products" },
-  { title: "Roll Stock", description: "Engineered for high-speed FFS applications", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&auto=format", link: "/products" },
-  { title: "High-Barrier Films", description: "Advanced protection for extended shelf life", image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&auto=format", link: "/products" },
-  { title: "Thermoforming Films", description: "High-strength forming solutions", image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&auto=format", link: "/products" },
-  { title: "Specialty Films", description: "UHT and Shrink Packaging Solutions", image: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&auto=format", link: "/products" },
-  { title: "BOPP Poly Woven Bags", description: "Custom films tailored for diverse food packaging", image: "https://images.unsplash.com/photo-1595079676339-1534801ad6cf?w=400&auto=format", link: "/products" },
-  { title: "Wicket Bag", description: "Custom bags for fast, efficient packaging", image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&auto=format", link: "/products" },
-  { title: "Laminated Films", description: "Premium multi-layer structures for superior protection", image: "https://images.unsplash.com/photo-1553531384-cc64ac80f931?w=400&auto=format", link: "/products" },
+  { title: "Pouches", description: "Functional, high-impact consumer packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139870/PureNest_Natural_Foods_Collection.png", link: "/products" },
+  { title: "Roll Stock", description: "Engineered for high-speed FFS applications", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139853/VitaBloom_Packaging_Film_Collection.png", link: "/products" },
+  { title: "High-Barrier Films", description: "Advanced protection for extended shelf life", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139935/Barrier_Film_Packaging_Showcase.png", link: "/products" },
+  { title: "Thermoforming Films", description: "High-strength forming solutions", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139883/Premium_DairyEdge_Cheddar_Cheese_Display.png", link: "/products" },
+  { title: "Specialty Films", description: "UHT and Shrink Packaging Solutions", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139872/Shrink-Wrapped_Packaging_Product_Display.png", link: "/products" },
+  { title: "BOPP Poly Woven Bags", description: "Custom films tailored for diverse food packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139927/Colorful_BOPP_Woven_Sack_Display.png", link: "/products" },
+  { title: "Wicket Bag", description: "Custom bags for fast, efficient packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139927/FreshBake_Sliced_Bread_Loaf.png", link: "/products" },
 ];
 
 const WHY_CHOOSE: Feature[] = [
@@ -103,18 +92,18 @@ const WHY_CHOOSE: Feature[] = [
 ];
 
 const INDUSTRIES: Industry[] = [
-  { label: "Meat & Cheese", description: "Vacuum & modified atmosphere packaging for freshness", image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&auto=format" },
-  { label: "Dairy", description: "Sealed, shelf-stable packaging that preserves taste", image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&auto=format" },
-  { label: "Snacks & Confectionery", description: "High-barrier films for crunch, aroma & long shelf life", image: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=400&auto=format" },
-  { label: "Bakery", description: "Moisture-controlled packaging for extended softness", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format" },
-  { label: "Tea & Coffee", description: "Aroma-lock & flavour-preserving packaging solutions", image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&auto=format" },
-  { label: "Beverages & Drinks", description: "Leak-proof, high-strength films for liquid packaging", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&auto=format" },
-  { label: "Sanitary", description: "Hygienic, safe & contamination-free packaging", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format" },
-  { label: "Household", description: "Durable, easy-tear packaging for everyday essentials", image: "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=400&auto=format" },
-  { label: "Pet Food & Pet Care", description: "Freshness-sealed, odour-lock packaging for pet products", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&auto=format" },
-  { label: "Medical & Pharma", description: "Sterile, tamper-evident & compliant medical packaging", image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&auto=format" },
+  { label: "Meat & Cheese", description: "Vacuum & modified atmosphere packaging for freshness", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139883/Premium_DairyEdge_Cheddar_Cheese_Display.png" },
+  { label: "Dairy", description: "Sealed, shelf-stable packaging that preserves taste", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792143442/dairy-product.webp" },
+  { label: "Snacks & Confectionery", description: "High-barrier films for crunch, aroma & long shelf life", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139925/Crispella_Snack_Trio_Still_Life.png" },
+  { label: "Bakery", description: "Moisture-controlled packaging for extended softness", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139926/Fresh_Bread_Packaging_Showcase.png" },
+  { label: "Tea & Coffee", description: "Aroma-lock & flavour-preserving packaging solutions", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139871/Premium_Tea_and_Coffee_Packaging.png" },
+  { label: "Beverages & Drinks", description: "Leak-proof, high-strength films for liquid packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139925/Fresh_Beverage_Pouches_with_Fruit_Splash.png" },
+  { label: "Sanitary", description: "Hygienic, safe & contamination-free packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139927/Fresh_Feminine_Hygiene_Product_Showcase.png" },
+  { label: "Household", description: "Durable, easy-tear packaging for everyday essentials", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139925/Complete_Household_Cleaning_Essentials_Collection.png" },
+  { label: "Pet Food & Pet Care", description: "Freshness-sealed, odour-lock packaging for pet products", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139870/Premium_Complete_Balanced_Dog_Food.png" },
+  { label: "Medical & Pharma", description: "Sterile, tamper-evident & compliant medical packaging", image: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792139869/Paracetamol_Tablets_Packaging_Infographic.png" },
 ];
- 
+
 const SUSTAINABILITY: Sustainability[] = [
   { icon: faRecycle, title: "Recyclable" },
   { icon: faSeedling, title: "Biodegradable" },
@@ -124,21 +113,18 @@ const SUSTAINABILITY: Sustainability[] = [
 /* ============================================================
    SHARED UI
    ============================================================ */
-
 function ArrowIcon() {
   return <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />;
 }
 
 /* ============================================================
-   CAROUSEL HOOK
-   ------------------------------------------------------------
-   Auto-advances every 5 seconds, pauses on hover, supports
-   arrow-key navigation, and exposes prev / next / goTo.
+   CAROUSEL HOOK (with touch swipe support)
    ============================================================ */
-
 function useCarousel(length: number, interval = 5000) {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const prev = useCallback(
     () => setIndex((i) => (i - 1 + length) % length),
@@ -162,17 +148,50 @@ function useCarousel(length: number, interval = 5000) {
     return () => window.removeEventListener("keydown", onKey);
   }, [prev, next]);
 
-  return { index, isPaused, setIsPaused, prev, next, goTo };
+  /* ---------- Touch swipe handlers ---------- */
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = null;
+    setIsPaused(true);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) {
+      setIsPaused(false);
+      return;
+    }
+    const delta = touchStartX.current - touchEndX.current;
+    const SWIPE_THRESHOLD = 50;
+    if (Math.abs(delta) > SWIPE_THRESHOLD) {
+      if (delta > 0) next();
+      else prev();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+    setIsPaused(false);
+  };
+
+  return {
+    index,
+    isPaused,
+    setIsPaused,
+    prev,
+    next,
+    goTo,
+    touchHandlers: { onTouchStart, onTouchMove, onTouchEnd },
+  };
 }
 
 /* ============================================================
    PAGE
    ============================================================ */
-
 export default function Home() {
-  const { index, isPaused, setIsPaused, prev, next, goTo } = useCarousel(
-    HERO_SLIDES.length
-  );
+  const { index, isPaused, setIsPaused, prev, next, goTo, touchHandlers } =
+    useCarousel(HERO_SLIDES.length);
   const current = HERO_SLIDES[index];
 
   const dots = useMemo(
@@ -199,6 +218,7 @@ export default function Home() {
         id="home"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        {...touchHandlers}
         aria-roledescription="carousel"
         aria-label="Hero highlights"
       >
@@ -266,21 +286,13 @@ export default function Home() {
                     src={slide.image}
                     alt=""
                     loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
                   />
                 </div>
               ))}
             </div>
 
             <div className="hero-gallery-accent" aria-hidden="true" />
-
-            <div className="hero-logo-badge">
-              <img
-                src={LOGO_URL}
-                alt="Aditya Agro Print logo"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
 
             <div className="hero-gallery-counter" aria-hidden="true">
               <span className="current">
@@ -326,6 +338,7 @@ export default function Home() {
                 alt="Team member"
                 className="person-image"
                 loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -389,6 +402,7 @@ export default function Home() {
                     alt={p.title}
                     className="product-img"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="product-footer">
@@ -437,9 +451,10 @@ export default function Home() {
           <div className="capabilities-content">
             <div className="capabilities-image">
               <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792139928/Heliostar_S_Industrial_Printing_Line.png"
                 alt="Manufacturing capabilities"
                 loading="lazy"
+                decoding="async"
               />
               <div className="capabilities-image-accent" aria-hidden="true" />
             </div>
@@ -484,7 +499,12 @@ export default function Home() {
             {INDUSTRIES.map((item) => (
               <div key={item.label} className="industry-card">
                 <div className="industry-img-wrap">
-                  <img src={item.image} alt={item.label} loading="lazy" />
+                  <img
+                    src={item.image}
+                    alt={item.label}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <div className="industry-body">
                   <h3 className="industry-label">{item.label}</h3>

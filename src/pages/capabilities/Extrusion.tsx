@@ -36,7 +36,7 @@ const blocks: ExtrusionBlock[] = [
       'Stretch Hood Film',
     ],
     image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792146233/Extrusion.webp',
     imagePosition: 'left',
   },
   {
@@ -59,7 +59,7 @@ const blocks: ExtrusionBlock[] = [
       'Stretch Film',
     ],
     image:
-      'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=800',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792146232/Extrusion1.webp',
     imagePosition: 'right',
   },
   {
@@ -81,7 +81,7 @@ const blocks: ExtrusionBlock[] = [
       'Stretch Film',
     ],
     image:
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792146232/Extrusion2.webp',
     imagePosition: 'left',
   },
   {
@@ -104,7 +104,7 @@ const blocks: ExtrusionBlock[] = [
       'Sausages',
     ],
     image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792146232/Extrusion3.webp',
     imagePosition: 'right',
   },
   {
@@ -123,7 +123,7 @@ const blocks: ExtrusionBlock[] = [
       'Snacks',
     ],
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792146232/Extrusion4.webp',
     imagePosition: 'left',
   },
 ];

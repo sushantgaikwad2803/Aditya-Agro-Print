@@ -57,7 +57,7 @@ const Lamination = () => {
               <span className="lamination-badge">Adhesive &amp; Extrusion</span>
               <div className="lamination-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792146745/Lamination1.webp"
                   alt="Solventless Lamination Machine"
                   loading="lazy"
                 />

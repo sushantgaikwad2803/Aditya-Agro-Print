@@ -8,22 +8,22 @@ interface Category {
 }
 
 const productCategories: Category[] = [
-  { title: "Spices", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Whole Spices", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Oil & Seeds", img: "https://images.unsplash.com/photo-1474979266404-7caddbed646e?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Leaves and Herbs", img: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Dry Fruits", img: "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Grocery", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Namkeens", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Jaggery", img: "https://images.unsplash.com/photo-1626202158874-63259679139a?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Pickles & Chutneys", img: "https://images.unsplash.com/photo-1599387269209-47e99122d35e?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Flours", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Rice", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Beans", img: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Whole Grains", img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Festival Products", img: "https://images.unsplash.com/photo-1605371924599-2d0365da700e?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Religious & Spiritual Products", img: "https://images.unsplash.com/photo-1545126714-1d355a7efc14?auto=format&fit=crop&q=80&w=600&h=450" },
-  { title: "Home & Kitchen", img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600&h=450" },
+  { title: "Spices", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142042/agro2.webp" },
+  { title: "Whole Spices", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142042/agro3.webp" },
+  { title: "Oil & Seeds", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142043/agro4.webp" },
+  { title: "Leaves and Herbs", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142044/agro5.webp" },
+  { title: "Dry Fruits", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142044/agro6.webp" },
+  { title: "Grocery", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142044/agro7.webp" },
+  { title: "Namkeens", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142045/agro8.webp" },
+  { title: "Jaggery", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142045/agro9.webp" },
+  { title: "Pickles & Chutneys", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142046/agro10.webp" },
+  { title: "Flours", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142046/agro11.webp" },
+  { title: "Rice", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142047/agro12.webp" },
+  { title: "Beans", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142047/agro13.webp" },
+  { title: "Whole Grains", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142048/agro14.webp" },
+  { title: "Festival Products", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142048/agro15.webp" },
+  { title: "Religious & Spiritual Products", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142049/agro16.webp" },
+  { title: "Home & Kitchen", img: "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142049/agro17.webp" },
 ];
 
 /* ---------- Component ---------- */
@@ -34,7 +34,7 @@ const Agro = () => {
       <section className="agro-hero">
         <div className="agro-hero-bg" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1600"
+            src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792144793/Global_Agro_Trade_and_Logistics.png"
             alt=""
           />
           <div className="agro-hero-overlay" />
@@ -75,7 +75,7 @@ const Agro = () => {
           <div className="agro-split">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142042/agro.webp"
                 alt="Farmers and supply chain"
                 loading="lazy"
               />
@@ -138,7 +138,7 @@ const Agro = () => {
           <div className="agro-split agro-split-reverse">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142050/agro18.webp"
                 alt="Mixed containers"
                 loading="lazy"
               />
@@ -169,7 +169,7 @@ const Agro = () => {
           <div className="agro-split">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142050/agro19.webp"
                 alt="Quality control"
                 loading="lazy"
               />
@@ -228,7 +228,7 @@ const Agro = () => {
           <div className="agro-split agro-split-reverse">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142050/agro20.webp"
                 alt="Global delivery"
                 loading="lazy"
               />
@@ -287,7 +287,7 @@ const Agro = () => {
           <div className="agro-split">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1589793907166-d39a9471f0df?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142051/agro21.webp"
                 alt="Private labelling"
                 loading="lazy"
               />
@@ -318,7 +318,7 @@ const Agro = () => {
           <div className="agro-split agro-split-reverse">
             <div className="agro-split-image">
               <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=900"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142051/agro22.webp"
                 alt="Shipping containers"
                 loading="lazy"
               />

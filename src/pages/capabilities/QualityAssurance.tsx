@@ -15,7 +15,7 @@ const tests: TestItem[] = [
     description:
       'To test the adhesion level of layers of the packaging film structure.',
     image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147590/Quality1.webp',
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const tests: TestItem[] = [
     description:
       'To evaluate how much pressure is needed to puncture the flexible packaging material.',
     image:
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147589/Quality3.webp',
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const tests: TestItem[] = [
     description:
       'To indicate how much a material can be stretched and how much force is needed to break the material.',
     image:
-      'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147588/Quality4.webp',
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const tests: TestItem[] = [
     description:
       'To analyze how well the package performs and how well it keeps the product enclosed within a given period.',
     image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147587/Quality5.webp',
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const tests: TestItem[] = [
     description:
       'To determine the maximum pressure at which a pouch will burst.',
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147588/Quality6.webp',
   },
   {
     id: 6,
@@ -55,7 +55,7 @@ const tests: TestItem[] = [
     description:
       'To determine the height from which the pouch can be dropped without failing.',
     image:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=500&h=350',
+      'https://res.cloudinary.com/aewdi5ja/image/upload/v1792147587/Quality7.webp',
   },
 ];
 
@@ -90,7 +90,7 @@ const QualityAssurance = () => {
               <span className="quality-badge">On-Site Lab</span>
               <div className="quality-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792147589/Quality2.webp"
                   alt="Quality Assurance Laboratory"
                   loading="lazy"
                 />

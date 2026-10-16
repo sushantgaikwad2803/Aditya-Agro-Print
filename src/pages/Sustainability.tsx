@@ -78,7 +78,7 @@ const bulletSections: BulletSection[] = [
       "Available in stand-up pouches, bags, and roll stock",
     ],
     image:
-      "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&q=80&w=800",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142073/sustainability.png",
     imagePosition: "right",
   },
   {
@@ -94,7 +94,7 @@ const bulletSections: BulletSection[] = [
       "Available in custom formats to match your product line",
     ],
     image:
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792142076/sustainability2.png",
     imagePosition: "left",
   },
 ];
@@ -137,7 +137,7 @@ const Sustainability = () => {
           <div className="approach-block">
             <div className="approach-image">
               <img
-                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142075/sustainability3.png"
                 alt="Sustainable packaging materials"
                 loading="lazy"
               />
@@ -232,7 +232,7 @@ const Sustainability = () => {
           <div className="pcr-block">
             <div className="pcr-image">
               <img
-                src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=800"
+                src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792142074/sustainability1.png"
                 alt="PCR PIR Laminates packaging"
                 loading="lazy"
               />

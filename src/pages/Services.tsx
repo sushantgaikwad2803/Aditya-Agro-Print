@@ -18,7 +18,7 @@ const services: Service[] = [
     description:
       "Rapid prototyping and sampling to validate your packaging concepts before full-scale production.",
     image:
-      "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792145450/service.png",
     tag: "Design",
   },
   {
@@ -27,7 +27,7 @@ const services: Service[] = [
     description:
       "Expert guidance on material selection, barrier properties, and structural integrity for your products.",
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792145450/service1.png",
     tag: "Consulting",
   },
   {
@@ -36,7 +36,7 @@ const services: Service[] = [
     description:
       "In-house design support to ensure your packaging artwork is print-ready, compliant, and visually striking.",
     image:
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792145453/service2.png",
     tag: "Creative",
   },
   {
@@ -45,7 +45,7 @@ const services: Service[] = [
     description:
       "Secure domestic and overseas warehousing to optimize your supply chain and inventory management.",
     image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792145448/service3.webp",
     tag: "Logistics",
   },
   {
@@ -54,7 +54,7 @@ const services: Service[] = [
     description:
       "Seamless export of assorted agro products and packaging materials with comprehensive logistical support.",
     image:
-      "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=800&h=500",
+      "https://res.cloudinary.com/aewdi5ja/image/upload/v1792145449/service4.webp",
     tag: "Export",
   },
 ];

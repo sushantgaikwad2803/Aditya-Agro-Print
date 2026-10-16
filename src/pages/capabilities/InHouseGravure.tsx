@@ -44,7 +44,7 @@ const InHouseGravure = () => {
               <span className="gravure-badge">Rotogravure</span>
               <div className="gravure-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/aewdi5ja/image/upload/v1792147459/copper-plated-cylinders.webp"
                   alt="In-House Gravure Cylinders"
                   loading="lazy"
                 />

@@ -874,7 +874,8 @@
   }
 
   .logo-text-tag {
-    display: none;
+    font-size: 0.46rem;
+    letter-spacing: 0.1em;
   }
 
   .logo-text-main {

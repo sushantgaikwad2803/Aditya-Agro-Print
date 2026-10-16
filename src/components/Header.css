@@ -587,7 +587,8 @@
    ============================================================ */
 @media (max-width: 900px) {
   :root {
-    --hdr-header-h: 72px;
+    /* FIX: Increased fallback height to better match actual rendered mobile header */
+    --hdr-header-h: 90px;
     --hdr-logo-size: 52px;
   }
 
@@ -624,6 +625,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    /* FIX: Ensure this uses the same top value as the menu */
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
     background-color: rgba(15, 23, 42, 0.45);
     opacity: 0;
@@ -644,13 +646,15 @@
   /* ---------- Slide-in menu from RIGHT ---------- */
   .primary-nav {
     position: fixed;
+    /* FIX: Ensure the menu starts below the actual header height */
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
     right: 0;
     bottom: 0;
     left: auto;
     width: min(88vw, 380px);
     max-width: 100%;
-    height: auto;
+    /* FIX: Force height to viewport minus header, preventing overflow off-screen */
+    height: calc(100dvh - var(--hdr-actual-h, var(--hdr-header-h)));
     max-height: calc(100dvh - var(--hdr-actual-h, var(--hdr-header-h)));
     background-color: var(--hdr-bg);
     flex-direction: column;
@@ -811,7 +815,7 @@
    ============================================================ */
 @media (max-width: 600px) {
   :root {
-    --hdr-header-h: 66px;
+    --hdr-header-h: 80px; /* Adjusted for small screens */
     --hdr-logo-size: 46px;
   }
 
@@ -866,6 +870,7 @@
 @media (max-width: 430px) {
   :root {
     --hdr-logo-size: 42px;
+    --hdr-header-h: 75px;
   }
 
   .logo-text-tag {

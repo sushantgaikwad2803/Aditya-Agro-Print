@@ -68,11 +68,14 @@ export default function Header() {
       document.documentElement.style.setProperty("--hdr-actual-h", `${h}px`);
     };
 
+    // Initial sync
     sync();
 
+    // Use ResizeObserver for robust height tracking
     const ro = new ResizeObserver(sync);
     ro.observe(el);
 
+    // Fallbacks for orientation changes and window resizing
     window.addEventListener("orientationchange", sync);
     window.addEventListener("resize", sync);
 

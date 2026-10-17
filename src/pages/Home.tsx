@@ -359,7 +359,7 @@ export default function Home() {
                   <span>Technical Expertise</span>
                 </div>
                 <div className="about-feature">
-                  <span className="icon" aria-hidden="true">
+                  <span className="icon" aria-hidden="true"> 
                     <FontAwesomeIcon icon={faGlobe} />
                   </span>
                   <span>Global Execution</span>

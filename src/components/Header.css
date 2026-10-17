@@ -1,9 +1,5 @@
 /* ============================================================
    HEADER — Aditya Agro Print
-   ------------------------------------------------------------
-   Mobile menu class renamed from `.nav-links` → `.primary-nav`
-   to eliminate collisions with any other `.nav-links` styles
-   in the codebase.
    ============================================================ */
 
 :root {
@@ -35,7 +31,6 @@
   --hdr-safe-left: env(safe-area-inset-left, 0px);
   --hdr-safe-right: env(safe-area-inset-right, 0px);
 
-  /* Live-measured navbar height (JS-synced). Fallback for no-JS. */
   --hdr-actual-h: calc(var(--hdr-header-h) + var(--hdr-safe-top));
 }
 
@@ -587,7 +582,6 @@
    ============================================================ */
 @media (max-width: 900px) {
   :root {
-    /* FIX: Increased fallback height to better match actual rendered mobile header */
     --hdr-header-h: 90px;
     --hdr-logo-size: 52px;
   }
@@ -625,7 +619,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /* FIX: Ensure this uses the same top value as the menu */
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
     background-color: rgba(15, 23, 42, 0.45);
     opacity: 0;
@@ -646,14 +639,12 @@
   /* ---------- Slide-in menu from RIGHT ---------- */
   .primary-nav {
     position: fixed;
-    /* FIX: Ensure the menu starts below the actual header height */
     top: var(--hdr-actual-h, calc(var(--hdr-header-h) + var(--hdr-safe-top)));
     right: 0;
     bottom: 0;
     left: auto;
     width: min(88vw, 380px);
     max-width: 100%;
-    /* FIX: Force height to viewport minus header, preventing overflow off-screen */
     height: calc(100dvh - var(--hdr-actual-h, var(--hdr-header-h)));
     max-height: calc(100dvh - var(--hdr-actual-h, var(--hdr-header-h)));
     background-color: var(--hdr-bg);
@@ -681,7 +672,6 @@
     visibility: visible;
   }
 
-  /* Prevent flex children from collapsing */
   .primary-nav > .nav-item,
   .primary-nav > .nav-btn-mobile,
   .primary-nav > .primary-nav-head {
@@ -758,7 +748,7 @@
     flex-shrink: 0;
   }
 
-  /* ---------- Accordion dropdown ---------- */
+  /* ---------- Accordion dropdown (FIXED) ---------- */
   .dropdown {
     position: static;
     opacity: 1;
@@ -768,20 +758,18 @@
     border: none;
     background-color: #f8f8fb;
     padding: 0 0.75rem;
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.35s var(--hdr-ease),
-      padding 0.35s var(--hdr-ease);
+    
+    /* REPLACED: Grid animation with robust max-height + opacity */
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s var(--hdr-ease), padding 0.35s var(--hdr-ease), opacity 0.3s var(--hdr-ease);
+    opacity: 0;
+    
     border-radius: 0;
     min-width: 0;
     max-width: none;
     pointer-events: auto;
-    overflow: hidden;
-  }
-
-  .dropdown > * {
-    overflow: hidden;
-    min-height: 0;
   }
 
   .dropdown::before {
@@ -789,8 +777,10 @@
   }
 
   .dropdown.open {
-    grid-template-rows: 1fr;
+    /* Adjust this max-height if your dropdown has MANY items (e.g., Capabilities) */
+    max-height: 600px; 
     padding: 0.5rem 0.75rem 0.75rem;
+    opacity: 1;
   }
 
   .dropdown-item {
@@ -815,7 +805,7 @@
    ============================================================ */
 @media (max-width: 600px) {
   :root {
-    --hdr-header-h: 80px; /* Adjusted for small screens */
+    --hdr-header-h: 80px;
     --hdr-logo-size: 46px;
   }
 
@@ -873,13 +863,24 @@
     --hdr-header-h: 75px;
   }
 
+  .logo-mark{
+    width: 4.5rem;
+    padding: 0;
+  }
+
   .logo-text-tag {
     font-size: 0.46rem;
     letter-spacing: 0.1em;
   }
 
   .logo-text-main {
-    font-size: 0.92rem;
+    font-size: 1.1rem;
+    line-height: 1.28rem;
+  }
+
+  .logo-text{
+    margin-left: -0.50rem;
+    line-height: 5rem;
   }
 
   .logo-wrapper {

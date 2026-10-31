@@ -1,4 +1,3 @@
-// App.tsx
 import { lazy, Suspense, useEffect } from "react";
 import {
   BrowserRouter,
@@ -11,13 +10,16 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppFloat from "./components/WhatsAppFloat";
+
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+
 config.autoAddCss = false;
 
 /* ============================================================
-   LAZY-LOADED ROUTES (Home is eager — it's the landing page)
+   LAZY-LOADED ROUTES
    ============================================================ */
+
 const Agro = lazy(() => import("./pages/Agro"));
 const Product = lazy(() => import("./pages/Product"));
 const Capabilities = lazy(() => import("./pages/Capabilities"));
@@ -25,9 +27,9 @@ const Services = lazy(() => import("./pages/Services"));
 const Sustainability = lazy(() => import("./pages/Sustainability"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
-// const NotFound = lazy(() => import("./pages/NotFound"));
 
 /* Capability sub-pages */
+
 const Extrusion = lazy(() => import("./pages/capabilities/Extrusion"));
 const Printing = lazy(() => import("./pages/capabilities/Printing"));
 const Lamination = lazy(() => import("./pages/capabilities/Lamination"));
@@ -50,20 +52,52 @@ const ShippingLogistics = lazy(
 /* ============================================================
    SCROLL TO TOP ON ROUTE CHANGE
    ============================================================ */
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Instant jump (no smooth animation) so the new page starts at top
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
   }, [pathname]);
 
   return null;
 }
 
 /* ============================================================
-   FALLBACK (shown while a lazy chunk loads)
+   SEO
    ============================================================ */
+
+function SEO() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const pageTitles: Record<string, string> = {
+      "/": "Aditya Agro Print Ind | Flexible Packaging Solutions",
+      "/agro": "Agro Packaging | Aditya Agro Print Ind",
+      "/products": "Products | Aditya Agro Print Ind",
+      "/services": "Services | Aditya Agro Print Ind",
+      "/capabilities": "Capabilities | Aditya Agro Print Ind",
+      "/sustainability": "Sustainability | Aditya Agro Print Ind",
+      "/about": "About Us | Aditya Agro Print Ind",
+      "/contact": "Contact Us | Aditya Agro Print Ind",
+    };
+
+    document.title =
+      pageTitles[pathname] ||
+      "Aditya Agro Print Ind | Flexible Packaging Solutions";
+  }, [pathname]);
+
+  return null;
+}
+
+/* ============================================================
+   FALLBACK
+   ============================================================ */
+
 function RouteFallback() {
   return (
     <div
@@ -86,7 +120,15 @@ function RouteFallback() {
           animation: "spin 0.7s linear infinite",
         }}
       />
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
+      <style>
+        {`@keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }`}
+      </style>
+
       <span className="sr-only">Loading page…</span>
     </div>
   );
@@ -95,16 +137,19 @@ function RouteFallback() {
 /* ============================================================
    APP
    ============================================================ */
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <SEO />
+
       <Header />
 
       <main>
         <Suspense fallback={<RouteFallback />}>
           <Routes>
-            {/* Home — eager */}
+            {/* Home */}
             <Route path="/" element={<Home />} />
 
             {/* Top-level pages */}
@@ -117,37 +162,46 @@ export default function App() {
 
             {/* Capabilities */}
             <Route path="/capabilities" element={<Capabilities />} />
+
             <Route
               path="/capabilities/extrusion"
               element={<Extrusion />}
             />
-            <Route path="/capabilities/printing" element={<Printing />} />
+
+            <Route
+              path="/capabilities/printing"
+              element={<Printing />}
+            />
+
             <Route
               path="/capabilities/lamination"
               element={<Lamination />}
             />
+
             <Route
               path="/capabilities/slitting-finishing"
               element={<SlittingFinishing />}
             />
+
             <Route
               path="/capabilities/pouch-manufacturing"
               element={<PouchManufacturing />}
             />
+
             <Route
               path="/capabilities/in-house-gravure"
               element={<InHouseGravure />}
             />
+
             <Route
               path="/capabilities/quality-assurance"
               element={<QualityAssurance />}
             />
+
             <Route
               path="/capabilities/shipping-logistics"
               element={<ShippingLogistics />}
             />
-
-            
           </Routes>
         </Suspense>
       </main>

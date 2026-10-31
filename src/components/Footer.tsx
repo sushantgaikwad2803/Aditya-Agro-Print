@@ -260,7 +260,7 @@ export default function Footer() {
         {/* ---------- BOTTOM BAR ---------- */}
         <div className="footer-bottom">
           <span className="footer-copy">
-            Copyright © {new Date().getFullYear()} Aditya Agro Print Ind Ltd.
+            Copyright © {new Date().getFullYear()} Aditya Agro Print Ind
             All rights reserved.
           </span>
           <span className="footer-credit">
